@@ -1,0 +1,11 @@
+.bread-crumbs {
+  font-family: $helvetica-family;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: $grey-1;
+}
+
+.bread-crumbs__current {
+  color: $black;
+}
