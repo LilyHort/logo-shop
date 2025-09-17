@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="page" lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Название проекта</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preload" as="font" href="fonts/Helvetica-Bold.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="fonts/Helvetica-Bold.woff" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" as="font" href="fonts/Helvetica.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="fonts/Helvetica.woff" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" as="font" href="fonts/Inter-Black.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="fonts/Inter-Black.woff" type="font/woff" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/styles.css">
+  <script src="scripts/index.js" defer></script>
+</head>
+
+<body class="page__body">
+  <div class="page__wrapper">
+    <header class="header">
+      <div class="header__wrapper">
+        <a class="header__logo-link link-reset" href="#">
+          <img class="header__logo-image" src="./images/logo.svg" width="100" height="22" alt="Логотип">
+        </a>
+        <div class="header__nav">
+        <nav class="header__nav-user">
+          <ul class="header__nav-user-list header__list list-reset">
+            <li class="header__nav-user-item header__nav-user-item--mobile header__item">
+              <a class="header__link link-reset" href="#">
+                <span class="visually-hidden">Поиск</span>
+                <svg class="header__nav-user-icon header__nav-user-icon--search" width="28" height="28">
+                  <use href="./icons/stack.svg#search"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="header__nav-user-item header__nav-user-item--mobile header__item">
+              <a class="header__link link-reset" href="#">
+                <span class="visually-hidden">Войти</span>
+                <svg class="header__nav-user-icon header__nav-user-icon--account" width="28" height="28">
+                  <use href="./icons/stack.svg#account"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="header__nav-user-item header__nav-user-item--mobile header__item">
+              <a class="header__link link-reset" href="#">
+                <span class="visually-hidden">Избранное</span>
+                <svg class="header__nav-user-icon header__nav-user-icon--favorite" width="28" height="28">
+                  <use href="./icons/stack.svg#favorite"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="header__nav-user-item header__item">
+              <a class="header__link link-reset" href="#">
+                <span class="visually-hidden">Корзина</span>
+                <svg class="header__nav-user-icon header__nav-user-icon--bag" width="28" height="28">
+                  <use href="./icons/stack.svg#bag"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <nav class="header__nav-main">
+          <button class="header__nav-main-button button-reset" type="button"></button>
+          <ul class="header__nav-main-list header__list list-reset">
+            <li class="header__nav-main-item header__item">
+              <a class="header__link link-reset" href="#">
+                Каталог
+              </a>
+            </li>
+            <li class="header__nav-main-item header__item">
+              <a class="header__link link-reset" href="#">
+                О компании
+              </a>
+            </li>
+            <li class="header__nav-main-item header__item">
+              <a class="header__link link-reset" href="#">
+                Магазины
+              </a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="main__wrapper">
+        <div class="bread-crumbs">
+          <a class="bread-crumbs__link link-reset" href="#">
+            Главная
+          </a>
+          <span class="bread-crumbs__separator">
+            /
+          </span>
+          <span class="bread-crumbs__current">
+            Оформление заказа
+          </span>
+
+        </div>
+      </div>
+      <section class="order">
+        <div class="order__wrapper">
+          <h1 class="order__title title">Оформление заказа</h1>
+          <p class="order__account">Есть аккаунт?<a class="order__account-link link-reset" href="#">Войти</a></p>
+          <div class="basket">
+            <div class="basket__wrapper">
+              <div class="basket__summary">
+                <p class="basket__info">
+                  <span class="basket__count">3</span> товара
+                  на сумму
+                  <span class="basket__total">25 000</span> ₽
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="cart">
+            <h2 class="cart__title visually-hidden">Ваш заказ</h2>
+            <div class="cart__wrapper">
+              <div class="card">
+                <ul class="card__list list-reset">
+                  <li class="card__item">
+                    <a class="card__link link-reset" href="#">
+                      <img class="card__image" src="#" width="90" height="111" alt="Товар">
+                      <h3 class="card__title">
+                        Утепленная стеганная куртка женская Top Hills
+                      </h3>
+                    </a>
+                    <div class="card__details">
+                      <p class="card__details-text card__details-text--article">Артикул <span
+                          class="card__article-number">512-05</span></p>
+                      <p class="card__details-text card__details-text--season">Сезон<span
+                          class="card__season">Осень-зима</span></p>
+                    </div>
+                    <fieldset class="card__size">
+                      <legend class="card__size-legend visually-hidden">Выберите размер</legend>
+                      <ul class="card__size-list list-reset">
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="XS"
+                            id="size-xs">
+                          <label class="card__size-label" for="size-xs">XS</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="S"
+                            id="size-s">
+                          <label class="card__size-label" for="size-s">S</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="M"
+                            id="size_m" checked>
+                          <label class="card__size-label card__size-label--active" for="size_m">M</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="L"
+                            id="size_l">
+                          <label class="card__size-label" for="size_l">L</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="XL"
+                            id="size_xl">
+                          <label class="card__size-label" for="size_xl">XL</label>
+                        </li>
+                      </ul>
+                    </fieldset>
+                    <fieldset class="card__color">
+                      <legend class="card__color-legend visually-hidden">Выберите цвет</legend>
+                      <ul class="card__color-list list-reset">
+                        <li class="card__color-item">
+                          <input class="card__color-input visually-hidden" type="radio" name="color-item-1"
+                            value="black" id="color_black_1" checked>
+                          <label class="card__color-label card__color-label--black card__color-label--active"
+                            for="color_black_1">
+                            <span class="visually-hidden">Серый</span>
+                          </label>
+                        </li>
+                        <li class="card__color-item">
+                          <input class="card__color-input visually-hidden" type="radio" name="color-item-1" value="blue"
+                            id="color_blue_1">
+                          <label class="card__color-label card__color-label--blue" for="color_blue_1">
+                            <span class="visually-hidden">Бирюзовый</span>
+                          </label>
+                        </li>
+                        <li class="card__color-item">
+                          <input class="card__color-input visually-hidden" type="radio" name="color-item-1"
+                            value="brown" id="color_brown_1">
+                          <label class="card__color-label card__color-label--brown" for="color_brown_1">
+                            <span class="visually-hidden">Горчичный</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </fieldset>
+                    <div class="card__price">
+                      <div class="card__price-unit">
+                        <span class="card__price-old">12 000 ₽</span>
+                        <span class="card__price-current">10 000 ₽</span>
+                      </div>
+                      <div class="card__price-quantity">
+                        <button class="card__price-quantity-button card__price-quantity-button--minus button-reset"
+                          type="button">
+                          -
+                        </button>
+                        <input class="card__price-quantity-input" type="number" value="1" min="1" max="100">
+                        <button class="card__price-quantity-button card__price-quantity-button--plus button-reset"
+                          type="button">
+                          +
+                        </button>
+                      </div>
+                      <div class="card__price-total">
+                        <span class="card__price-old">24 000 ₽</span>
+                        <span class="card__price-current">20 000 ₽</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="card__item card__item-deleted">
+                    <p class="card__item-deleted-text">
+                      Товар <span class="card__item-deleted-name">Наименование товара</span> был удален из корзины.
+                    </p>
+                    <button class="card__item-deleted-button button-reset" type="button">Восстановить</button>
+                  </li>
+                  <li class="card__item">
+                    <a class="card__link link-reset" href="#">
+                      <img class="card__image" src="#" width="90" height="111" alt="Товар">
+                      <h3 class="card__title">
+                        Вязанная шапка Zolla
+                      </h3>
+                    </a>
+                    <div class="card__details">
+                      <p class="card__details-text card__details-text--article">Артикул <span
+                          class="card__article-number">891-256</span></p>
+                      <p class="card__details-text card__details-text--season">Сезон<span
+                          class="card__season">Демисезон</span></p>
+                    </div>
+                    <fieldset class="card__size">
+                      <legend class="card__size-legend visually-hidden">Выберите размер</legend>
+                      <ul class="card__size-list list-reset">
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="XS"
+                            id="size-xs-2">
+                          <label class="card__size-label" for="size-xs-2">XS</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="S"
+                            id="size-s-2">
+                          <label class="card__size-label card__size-label--active" for="size-s-2">S</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="M"
+                            id="size-m-2" checked>
+                          <label class="card__size-label" for="size-m-2">M</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="L"
+                            id="size-l-2">
+                          <label class="card__size-label" for="size-l-2">L</label>
+                        </li>
+                        <li class="card__size-item">
+                          <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="XL"
+                            id="size-xl-2">
+                          <label class="card__size-label card__size-label--none" for="size-xl-2">XL</label>
+                        </li>
+                      </ul>
+                    </fieldset>
+                    <fieldset class="card__color">
+                      <legend class="card__color-legend visually-hidden">Выберите цвет</legend>
+                      <ul class="card__color-list list-reset">
+                        <li class="card__color-item">
+                          <input class="card__color-input visually-hidden" type="radio" name="color-item-2"
+                            value="black" id="color_black_2" checked>
+                          <label class="card__color-label card__color-label--black card__color-label--active"
+                            for="color_black_2">
+                            <span class="visually-hidden">Серый</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </fieldset>
+                    <div class="card__price">
+                      <div class="card__price-unit">
+                        <span class="card__price-old card__price-old--none">12 000 ₽</span>
+                        <span class="card__price-current">500 ₽</span>
+                      </div>
+                      <div class="card__price-quantity">
+                        <button class="card__price-quantity-button card__price-quantity-button--minus button-reset"
+                          type="button">
+                          -
+                        </button>
+                        <input class="card__price-quantity-input" type="number" value="1" min="1" max="100">
+                        <button class="card__price-quantity-button card__price-quantity-button--plus button-reset"
+                          type="button">
+                          +
+                        </button>
+                      </div>
+                      <div class="card__price-total">
+                        <span class="card__price-old card__price-old--none">24 000 ₽</span>
+                        <span class="card__price-current">500 ₽</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <form class="form" action="#">
+        <div class="form__wrapper">
+
+          <div class="contacts-personal">
+            <div class="contacts-personal__wrapper">
+              <fieldset class="contacts-personal__fieldset">
+                <legend class="contacts-personal__title form__title title">Контактные данные</legend>
+                <ul class="contacts-personal__list list-reset">
+                  <li class="contacts-personal__item">
+                    <label class="contacts-personal__label" for="name">Имя</label>
+                    <input class="contacts-personal__input" type="text" name="name" id="name" placeholder="Имя"
+                      required>
+                  </li>
+                  <li class="contacts-personal__item">
+                    <label class="contacts-personal__label" for="surname">Фамилия</label>
+                    <input class="contacts-personal__input" type="text" name="surname" id="surname"
+                      placeholder="Фамилия" required>
+                  </li>
+                  <li class="contacts-personal__item">
+                    <label class="contacts-personal__label" for="phone">Телефон</label>
+                    <input class="contacts-personal__input" type="text" name="phone" id="phone" placeholder="Телефон"
+                      required>
+                  </li>
+                  <li class="contacts-personal__item">
+                    <label class="contacts-personal__label" for="email">Email</label>
+                    <input class="contacts-personal__input" type="email" name="email" id="email" placeholder="Email"
+                      required>
+                  </li>
+                  <li class="contacts-personal__item">
+                    <label class="contacts-personal__label" for="address">Адрес доставки</label>
+                    <input class="contacts-personal__input" type="text" name="address" id="address"
+                      placeholder="Адрес доставки" required>
+                    <div class="contacts-personal__map"> </div>
+                  </li>
+                </ul>
+              </fieldset>
+              <fieldset class="payment">
+                <legend class="payment__title form__title title">Способ оплаты</legend>
+                <ul class="payment__list list-reset">
+                  <li class="payment__item">
+                    <label class="payment__label" for="payment-cash">
+                      <input class="payment__input visually-hidden" type="radio" name="payment" value="cash"
+                        id="payment-cash" required>
+                      <span class="payment__label-icon"></span>
+                      <span class="payment__label-text">Наличными курьеру</span>
+                    </label>
+                  </li>
+                  <li class="payment__item">
+                    <label class="payment__label" for="payment-card-courier">
+                      <input class="payment__input visually-hidden" type="radio" name="payment" value="card-courier"
+                        id="payment-card-courier">
+                      <span class="payment__label-icon"></span>
+                      <span class="payment__label-text">Картой курьеру</span>
+                    </label>
+                  </li>
+                  <li class="payment__item">
+                    <label class="payment__label" for="payment-card-online">
+                      <input class="payment__input visually-hidden" type="radio" name="payment" value="card-online"
+                        id="payment-card-online">
+                      <span class="payment__label-icon"></span>
+                      <span class="payment__label-text">Картой онлайн</span>
+                    </label>
+                  </li>
+                </ul>
+              </fieldset>
+              <fieldset class="comment">
+                <legend class="comment__legend form__title title">Комментарий к заказу</legend>
+                <textarea class="comment__input" name="comment" id="comment"
+                  placeholder="Комментарий к заказу"></textarea>
+                <span class="comment__validation">Использовано <span class="comment__validation-count">0</span>/142
+                  символов</span>
+              </fieldset>
+              <div class="total">
+                <div class="total__wrapper">
+                  <ul class="total__list list-reset">
+                    <li class="total__item total__item--products">
+                      <span class="total__label">Товары</span>
+                      <span class="total__price">24 500 ₽</span>
+                    </li>
+                    <li class="total__item total__item--discount">
+                      <span class="total__label">Скидка</span>
+                      <span class="total__price accent-color">- 4 500 ₽</span>
+                      <ul class="total__sublist list-reset">
+                        <li class="total__subitem">
+                          <span class="total__sublabel">Акции</span>
+                          <span class="total__subprice accent-color">- 4 000 ₽</span>
+                        </li>
+                        <li class="total__subitem">
+                          <span class="total__sublabel">Промокод</span>
+                          <span class="total__subprice accent-color">- 500 ₽</span>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="total__item total__item--delivery">
+                      <span class="total__label">Доставка</span>
+                      <span class="total__price">200 ₽</span>
+                    </li>
+                  </ul>
+                  <div class="total__option">
+                    <div class="total__option-toggle">
+                      <span class="total__option-toggle-text">Получить товар со склада</span>
+                      <input class="total__option-toggle-input visually-hidden" type="checkbox" name="option"
+                        id="option">
+                      <span class="total__option-toggle-icon"></span>
+                    </div>
+                    <span class="total__option-text-info">Сроки получения могут измениться</span>
+                  </div>
+                  <div class="total__price total__price--total">
+                    <span class="total__price-label">Итого:</span>
+                    <span class="total__price-value">20 700 <span class="currency">₽</span></span>
+                  </div>
+                  <input class="total__input" type="text" name="promo" id="promo" placeholder="Введите промокод">
+                  <button class="total__button button-reset" type="submit">Оформить заказ</button>
+                  <p class="total__text">Нажимая кнопку “Оформить заказ”, Вы соглашаетесь с <a
+                      class="total__text-link link-reset" href="#">политикой конфиденциальности.</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+
+</html>

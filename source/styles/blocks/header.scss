@@ -1,0 +1,137 @@
+.header__wrapper {
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 16px;
+  justify-content: space-between;
+  position: relative;
+}
+
+.header__logo-link {
+  @media (min-width: $desktop-width) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+
+  @media (min-width: $desktop-width) {
+    width: 100%;
+    flex-direction: row-reverse;
+  }
+}
+
+.header__nav-main-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &--open {
+    &::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 0;
+      width: 32px;
+      height: 1.5px;
+      background-color: #000;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 13.5px;
+      right: 0;
+      width: 18px;
+      height: 1.5px;
+      background-color: #000;
+    }
+  }
+
+  &--close {
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background-color: #000;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+  
+  @media (min-width: $desktop-width) {
+    display: none;
+  }
+}
+
+.header__nav-main-list {
+  display: none;
+
+
+  &--open {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    text-align: center;
+  }
+
+  @media (min-width: $desktop-width) {
+    display: flex;
+  }
+}
+
+.header__nav-main-item {
+  font-family: $helvetica-family;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  padding: 12px 16px;
+}
+
+.header__nav-user-item--mobile {
+  display: none;
+
+  @media (min-width: $desktop-width) {
+    display: block;
+  }
+}
+
+.header__nav-user-list {
+  @media (min-width: $desktop-width) {
+    display: flex;
+  }
+}
+
+
+
