@@ -1,0 +1,33 @@
+.contacts-personal__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+}
+
+.contacts-personal__item {
+  position: relative;
+}
+
+.contacts-personal__label {
+  display: none;
+  position: absolute;
+  background-color: $white;
+  left: 12px;
+  top: -10px;
+  color: $grey-1;
+
+  &--visible {
+    display: block;
+  }
+}
+
+.contacts-personal__input {
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
