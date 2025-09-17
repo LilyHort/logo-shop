@@ -1,23 +1,9 @@
 .ruble {
-position: relative;
+    font-family: system-ui;
 
-  &::after {
-  content: "";
-  position: absolute;
-  border-top: 2px solid $black;
-  height: 2px;
-  width: 4.5px;
-  top: 45%;
-  right: 72%;
-}
+    &--basket {
+        font-size: 24px;
+        line-height: 30px;
+    }
 
-&::before {
-  content: "";
-  position: absolute;
-  border-top: 2px solid $black;
-  height: 2px;
-  width: 8px;
-  top: 60%;
-  right: 50%;
-}
 }

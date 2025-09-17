@@ -1,0 +1,247 @@
+.card__item {
+  position: relative;
+  border-top: 0.50px solid $grey-2;
+  padding: 16px 0;
+}
+
+.card__item:last-child {
+  border-bottom: 0.50px solid $grey-2;
+}
+
+.card__button {
+  position: absolute;
+  top: 14px;
+  right: -5px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 2px;
+    background-color: $black;
+    transform-origin: center;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.card__link {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.card__title {
+font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+margin: 0;
+padding-right: 20px;
+}
+
+.card__details {
+font-size: 12px;
+line-height: 15px;
+color: $grey-1;
+}
+
+.card__details-text {
+  display: flex;
+  gap: 5px;
+}
+
+.card__details-meaning {
+color: $black;
+}
+
+/* Размер */
+
+.card__size {
+  border: none;
+}
+
+.card__size-list {
+  display: flex;
+  gap: 9px;
+}
+
+.card__size-item {
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  background-color: $grey-3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: $black;
+
+  &--active {
+    background-color: $black;
+    color: $white;
+  }
+
+  &--none {
+    color: $grey-2;
+  }
+}
+
+.card__size-label {
+  font-size: 12px;
+  line-height: 15px;
+  color: inherit;
+}
+
+/* Цвет */
+
+.card__color {
+  border: none;
+}
+
+.card__color-list {
+  display: flex;
+  gap: 16px;
+}
+
+.card__color-item {
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  background-color: $grey-3;
+  color: $grey-3;
+
+  &--black {
+    background-color: $black-product;
+    color: $black-product;
+  }
+
+  &--blue {
+    background-color: $blue-product;
+    color: $blue-product;
+  }
+
+  &--brown {
+    background-color: $brown-product;
+    color: $brown-product;
+  }
+
+  &--active {
+    box-shadow: 0 0 0 2px $white, 0 0 0 3px currentColor;
+  }
+}
+
+/* Цена */
+.card__price {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 320px;
+}
+
+.card__price-old {
+font-size: 12px;
+line-height: 15px;
+text-decoration: line-through;
+color: $grey-1;
+}
+
+.card__price-current {
+font-weight: 700;
+font-size: 16px;
+line-height: 21px;
+color: $black;
+}
+
+.card__price-quantity {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 8px;
+  height: 42px;
+  min-width: 146px;
+  max-width: 153px;
+  background-color: $grey-3;
+  border-radius: 5px;
+}
+
+.card__price-quantity-input,
+.card__price-quantity-button {
+  border: none;
+  background-color: transparent;
+  text-align: center;
+}
+
+.card__price-quantity-button--minus {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2px;
+    background-color: $black;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.card__price-quantity-button--plus {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: $black;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    width: 12px;
+    height: 2px;
+  }
+
+  &::after {
+    width: 2px;
+    height: 12px;
+  }
+}
+
+/* Удаленный товар */
+
+.card__item-deleted-wrapper {
+  background-color: $grey-3;
+  padding: 12px 24px 12px 8px;
+}
+
+.card__item-deleted-text {
+  font-size: 14px;
+  line-height: 18px;
+  color: $grey-1;
+}
+
+.card__item-deleted-name {
+  font-weight: 700;
+}
+

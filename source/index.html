@@ -107,8 +107,7 @@
                   <p class="basket__info">
                     <span class="basket__count">3</span> товара
                     на сумму
-                    <span class="basket__total">25 000</span> <span class="ruble">
-                      P
+                    <span class="basket__total">25&nbsp;000</span><span class="ruble ruble--basket">₽
                     </span>
                   </p>
                 </div>
@@ -120,20 +119,16 @@
                 <div class="card">
                   <ul class="card__list list-reset">
                     <li class="card__item">
+                      <button class="card__button button-reset" type="delete"></button>
                       <a class="card__link link-reset" href="#">
                         <picture>
                           <source media="(min-width: 1300px)"
-                            srcset="./images/basket/top-hills-desktop@1x.webp 1x, ./images/basket/top-hills-desktop@2x.webp 2x"
-                            type="image/webp">
+                          srcset="./images/basket/top-hills-desktop@1x.webp 1x, ./images/basket/top-hills-desktop@2x.webp 2x"
+                          type="image/webp" width="130" height="160">
+                          <source srcset="./images/basket/top-hills-mobile@1x.webp 1x, ./images/basket/top-hills-mobile@2x.webp 2x" type="image/webp" width="90" height="111">
                           <source media="(min-width: 1300px)"
                             srcset="./images/basket/top-hills-desktop@1x.jpg 1x, ./images/basket/top-hills-desktop@2x.jpg 2x"
-                            type="image/jpeg">
-                          <source
-                            srcset="./images/basket/top-hills-mobile@1x.webp 1x, ./images/basket/top-hills-mobile@2x.webp 2x"
-                            type="image/webp">
-                          <source
-                            srcset="./images/basket/top-hills-mobile@1x.jpg 1x, ./images/basket/top-hills-mobile@2x.jpg 2x"
-                            type="image/jpeg">
+                            type="image/jpeg" width="130" height="160">
                           <img class="card__image" src="./images/basket/top-hills-mobile@1x.jpg"
                             srcset="./images/basket/top-hills-mobile@2x.jpg 2x" width="90" height="111" alt="Товар">
                         </picture>
@@ -143,9 +138,9 @@
                       </a>
                       <div class="card__details">
                         <p class="card__details-text card__details-text--article">Артикул <span
-                            class="card__article-number">512-05</span></p>
+                            class="card__details-meaning card__article-number">512-05</span></p>
                         <p class="card__details-text card__details-text--season">Сезон<span
-                            class="card__season">Осень-зима</span></p>
+                            class="card__details-meaning card__season">Осень-зима</span></p>
                       </div>
                       <fieldset class="card__size">
                         <legend class="card__size-legend visually-hidden">Выберите размер</legend>
@@ -160,7 +155,7 @@
                               id="size-s">
                             <label class="card__size-label" for="size-s">S</label>
                           </li>
-                          <li class="card__size-item">
+                          <li class="card__size-item card__size-item--active">
                             <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="M"
                               id="size_m" checked>
                             <label class="card__size-label card__size-label--active" for="size_m">M</label>
@@ -180,7 +175,7 @@
                       <fieldset class="card__color">
                         <legend class="card__color-legend visually-hidden">Выберите цвет</legend>
                         <ul class="card__color-list list-reset">
-                          <li class="card__color-item">
+                          <li class="card__color-item card__color-item--active card__color-item--black">
                             <input class="card__color-input visually-hidden" type="radio" name="color-item-1"
                               value="black" id="color_black_1" checked>
                             <label class="card__color-label card__color-label--black card__color-label--active"
@@ -188,14 +183,14 @@
                               <span class="visually-hidden">Серый</span>
                             </label>
                           </li>
-                          <li class="card__color-item">
+                          <li class="card__color-item card__color-item--blue">
                             <input class="card__color-input visually-hidden" type="radio" name="color-item-1"
                               value="blue" id="color_blue_1">
                             <label class="card__color-label card__color-label--blue" for="color_blue_1">
                               <span class="visually-hidden">Бирюзовый</span>
                             </label>
                           </li>
-                          <li class="card__color-item">
+                          <li class="card__color-item card__color-item--brown">
                             <input class="card__color-input visually-hidden" type="radio" name="color-item-1"
                               value="brown" id="color_brown_1">
                             <label class="card__color-label card__color-label--brown" for="color_brown_1">
@@ -206,46 +201,65 @@
                       </fieldset>
                       <div class="card__price">
                         <div class="card__price-unit">
-                          <span class="card__price-old">12 000 <span class="ruble">
-                              P
-                            </span></span>
-                          <span class="card__price-current">10 000 ₽</span>
+                          <span class="card__price-old">12&nbsp;000 <span class="ruble ruble--card-old">₽
+                          </span></span>
+                          <br>
+                          <span class="card__price-current">10&nbsp;000 <span class="ruble
+                            ruble--card-current">₽
+                          </span></span>
                         </div>
                         <div class="card__price-quantity">
                           <button class="card__price-quantity-button card__price-quantity-button--minus button-reset"
                             type="button">
-                            -
+                            <span class="visually-hidden">Уменьшить количество</span>
+                            <span class="card__price-quantity-button--minus"></span>
                           </button>
-                          <input class="card__price-quantity-input" type="number" value="1" min="1" max="100">
+                          <input class="card__price-quantity-input" type="number" value="2" min="1" max="100">
                           <button class="card__price-quantity-button card__price-quantity-button--plus button-reset"
                             type="button">
-                            +
+                            <span class="visually-hidden">Увеличить количество</span>
+                            <span class="card__price-quantity-button--plus"></span>
                           </button>
                         </div>
                         <div class="card__price-total">
-                          <span class="card__price-old">24 000 ₽</span>
-                          <span class="card__price-current">20 000 ₽</span>
+                          <span class="card__price-old card__price-old--total">24&nbsp;000 <span class="ruble ruble--card-old">₽</span></span>
+                          <br>
+                          <span class="card__price-current">20&nbsp;000 <span class="ruble ruble--card-current">₽</span></span>
                         </div>
                       </div>
                     </li>
                     <li class="card__item card__item-deleted">
+                      <button class="card__button button-reset" type="delete"></button>
+                      <div class="card__item-deleted-wrapper">
                       <p class="card__item-deleted-text">
-                        Товар <span class="card__item-deleted-name">Наименование товара</span> был удален из корзины.
+                        Товар <a class="card__item-deleted-name link-reset" href="#">Наименование товара</a> был удален из корзины.
                       </p>
                       <button class="card__item-deleted-button button-reset" type="button">Восстановить</button>
+                      </div>
                     </li>
                     <li class="card__item">
+                      <button class="card__button button-reset" type="delete"></button>
                       <a class="card__link link-reset" href="#">
-                        <img class="card__image" src="#" width="90" height="111" alt="Товар">
+                        <picture>
+                          <source media="(min-width: 1300px)"
+                          srcset="./images/basket/cap-zolla-desktop@1x.webp 1x, ./images/basket/cap-zolla-desktop@2x.webp 2x"
+                          type="image/webp" width="130" height="160">
+                          <source srcset="./images/basket/cap-zolla-mobile@1x.webp 1x, ./images/basket/cap-zolla-mobile@2x.webp 2x" type="image/webp" width="90" height="111">
+                          <source media="(min-width: 1300px)"
+                            srcset="./images/basket/cap-zolla-desktop@1x.jpg 1x, ./images/basket/cap-zolla-desktop@2x.jpg 2x"
+                            type="image/jpeg" width="130" height="160">
+                          <img class="card__image" src="./images/basket/cap-zolla-mobile@1x.jpg"
+                            srcset="./images/basket/cap-zolla-mobile@2x.jpg 2x" width="90" height="111" alt="Товар">
+                        </picture>
                         <h3 class="card__title">
                           Вязанная шапка Zolla
                         </h3>
                       </a>
                       <div class="card__details">
                         <p class="card__details-text card__details-text--article">Артикул <span
-                            class="card__article-number">891-256</span></p>
+                            class="card__details-meaning card__article-number">891-256</span></p>
                         <p class="card__details-text card__details-text--season">Сезон<span
-                            class="card__season">Демисезон</span></p>
+                            class="card__details-meaning card__season">Демисезон</span></p>
                       </div>
                       <fieldset class="card__size">
                         <legend class="card__size-legend visually-hidden">Выберите размер</legend>
@@ -255,7 +269,7 @@
                               id="size-xs-2">
                             <label class="card__size-label" for="size-xs-2">XS</label>
                           </li>
-                          <li class="card__size-item">
+                          <li class="card__size-item card__size-item--active">
                             <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="S"
                               id="size-s-2">
                             <label class="card__size-label card__size-label--active" for="size-s-2">S</label>
@@ -270,30 +284,30 @@
                               id="size-l-2">
                             <label class="card__size-label" for="size-l-2">L</label>
                           </li>
-                          <li class="card__size-item">
+                          <li class="card__size-item card__size-item--none">
                             <input class="card__size-input visually-hidden" type="radio" name="size-item-2" value="XL"
                               id="size-xl-2">
-                            <label class="card__size-label card__size-label--none" for="size-xl-2">XL</label>
+                            <label class="card__size-label card__size-label--none" for="size-xl-2">Xl</label>
                           </li>
                         </ul>
                       </fieldset>
                       <fieldset class="card__color">
                         <legend class="card__color-legend visually-hidden">Выберите цвет</legend>
                         <ul class="card__color-list list-reset">
-                          <li class="card__color-item">
+                          <li class="card__color-item card__color-item--active card__color-item--black">
                             <input class="card__color-input visually-hidden" type="radio" name="color-item-2"
                               value="black" id="color_black_2" checked>
                             <label class="card__color-label card__color-label--black card__color-label--active"
                               for="color_black_2">
-                              <span class="visually-hidden">Серый</span>
+                              <span class="visually-hidden">Черный</span>
                             </label>
                           </li>
                         </ul>
                       </fieldset>
                       <div class="card__price">
                         <div class="card__price-unit">
-                          <span class="card__price-old card__price-old--none">12 000 ₽</span>
-                          <span class="card__price-current">500 ₽</span>
+                          <span class="card__price-current">500 <span class="ruble ruble--card-current">₽
+                          </span></span>
                         </div>
                         <div class="card__price-quantity">
                           <button class="card__price-quantity-button card__price-quantity-button--minus button-reset"
@@ -307,8 +321,8 @@
                           </button>
                         </div>
                         <div class="card__price-total">
-                          <span class="card__price-old card__price-old--none">24 000 ₽</span>
-                          <span class="card__price-current">500 ₽</span>
+                          <span class="card__price-current">500 <span class="ruble ruble--card-current">₽
+                          </span></span>
                         </div>
                       </div>
                     </li>
@@ -396,25 +410,30 @@
                     <ul class="total__list list-reset">
                       <li class="total__item total__item--products">
                         <span class="total__label">Товары</span>
-                        <span class="total__price">24 500 ₽</span>
+                        <span class="total__price">24&nbsp;500 <span class="ruble ruble--total">₽
+                        </span></span>
                       </li>
                       <li class="total__item total__item--discount">
                         <span class="total__label">Скидка</span>
-                        <span class="total__price accent-color">- 4 500 ₽</span>
+                        <span class="total__price accent-color">- 4&nbsp;500 <span class="ruble ruble--discount">₽
+                        </span></span>
                         <ul class="total__sublist list-reset">
                           <li class="total__subitem">
                             <span class="total__sublabel">Акции</span>
-                            <span class="total__subprice accent-color">- 4 000 ₽</span>
+                            <span class="total__subprice accent-color">- 4&nbsp;000 <span class="ruble ruble--subprice">₽
+                            </span></span>
                           </li>
                           <li class="total__subitem">
                             <span class="total__sublabel">Промокод</span>
-                            <span class="total__subprice accent-color">- 500 ₽</span>
+                            <span class="total__subprice accent-color">- 500 <span class="ruble ruble--subprice">₽
+                            </span></span>
                           </li>
                         </ul>
                       </li>
                       <li class="total__item total__item--delivery">
                         <span class="total__label">Доставка</span>
-                        <span class="total__price">200 ₽</span>
+                        <span class="total__price">200 <span class="ruble ruble--total">₽
+                        </span></span>
                       </li>
                     </ul>
                     <div class="total__option">
@@ -428,7 +447,8 @@
                     </div>
                     <div class="total__price total__price--total">
                       <span class="total__price-label">Итого:</span>
-                      <span class="total__price-value">20 700 <span class="currency">₽</span></span>
+                      <span class="total__price-value">20&nbsp;700 <span class="ruble ruble--total-price">₽
+                      </span></span>
                     </div>
                     <input class="total__input" type="text" name="promo" id="promo" placeholder="Введите промокод">
                     <button class="total__button button-reset" type="submit">Оформить заказ</button>
