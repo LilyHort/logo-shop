@@ -3,6 +3,7 @@
 @import "./common/global.scss";
 @import "./common/fonts.scss";
 @import "./common/visually-hidden.scss";
+@import "./common/accent-color.scss";
 
 /* BLOCKS */
 @import "./blocks/list.scss";
@@ -19,3 +20,8 @@
 @import "./blocks/card.scss";
 @import "./blocks/form.scss";
 @import "./blocks/contacts-personal.scss";
+@import "./blocks/address.scss";
+@import "./blocks/payment.scss";
+@import "./blocks/comment.scss";
+@import "./blocks/total.scss";
+@import "./blocks/footer.scss";

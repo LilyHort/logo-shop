@@ -265,3 +265,336 @@ contactsInputs.forEach((input) => {
     }
   });
 });
+
+/* Интеграция с DaData и Яндекс.Карты */
+
+// Конфигурация API (замените на ваши ключи)
+const DADATA_TOKEN = '11d7d340d855116e8e9aaedbaefae9c02190e5e4';
+//const YANDEX_API_KEY = 'f744a2c0-e2ea-421d-a839-f13515eb267e';
+
+let yandexMap = null;
+let mapPlacemark = null;
+
+// Инициализация Яндекс.Карты
+function initYandexMap() {
+  window.ymaps.ready(() => {
+    const mapContainer = document.querySelector('.contacts-personal__map');
+    const addressInput = document.querySelector('#address');
+
+    if (!mapContainer || !addressInput){
+      return;
+    }
+
+    // Показываем карту сразу для тестирования
+    mapContainer.classList.add('contacts-personal__map--visible');
+
+    // Создаем карту с центром в Москве
+    yandexMap = new window.ymaps.Map(mapContainer, {
+      center: [55.751574, 37.573856], // Москва
+      zoom: 10,
+      controls: ['zoomControl', 'searchControl']
+    });
+
+    // Обработчик клика по карте
+    yandexMap.events.add('click', (e) => {
+      const coords = e.get('coords');
+      addPlacemark(coords);
+
+      // Обратное геокодирование (координаты -> адрес)
+      window.ymaps.geocode(coords).then((res) => {
+        const firstGeoObject = res.geoObjects.get(0);
+        const address = firstGeoObject.getAddressLine();
+
+        addressInput.value = address;
+
+        // Показываем лейбл
+        const label = addressInput.parentElement.querySelector('.contacts-personal__label');
+        if (label) {
+          label.classList.add('contacts-personal__label--visible');
+          addressInput.placeholder = '';
+        }
+      });
+    });
+  });
+}
+
+// Добавление маркера на карту
+function addPlacemark(coords, address = '') {
+  if (!yandexMap){
+    return;
+  }
+
+
+  // Удаляем предыдущий маркер
+  if (mapPlacemark) {
+    yandexMap.geoObjects.remove(mapPlacemark);
+  }
+
+  // Создаем новый маркер с кастомной иконкой
+  mapPlacemark = new window.ymaps.Placemark(coords, {
+    hintContent: address || 'Выбранный адрес',
+    balloonContent: address || 'Местоположение'
+  }, {
+    // Вариант 1: Кастомная SVG иконка
+    iconLayout: 'default#image',
+    iconImageHref: `data:image/svg+xml;base64,${btoa(`
+      <svg width="27" height="39" viewBox="0 0 27 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M26.4283 13.1881C26.4283 20.4716 20.3428 32.1025 13.2141 38.6965C6.70158 32.7642 0 20.4716 0 13.1881C0 5.9045 5.91617 0 13.2141 0C20.5121 0 26.4283 5.9045 26.4283 13.1881Z" fill="black"/>
+<circle cx="13.2141" cy="13.1881" r="8" fill="white"/>
+</svg>
+    `)}`,
+
+    iconImageSize: [32, 32],
+    iconImageOffset: [-16, -16]
+  });
+
+  yandexMap.geoObjects.add(mapPlacemark);
+  yandexMap.setCenter(coords, 15);
+
+  // Показываем карту
+  const mapContainer = document.querySelector('.contacts-personal__map');
+  if (mapContainer) {
+    mapContainer.classList.add('contacts-personal__map--visible');
+  }
+}
+
+// Создаем выпадающий список для подсказок
+function createSuggestionsList() {
+  const suggestionsList = document.createElement('ul');
+  suggestionsList.className = 'address-suggestions';
+  return suggestionsList;
+}
+
+// Инициализация DaData автокомплита (собственная реализация)
+function initDaDataSuggestions() {
+  const addressInput = document.querySelector('#address');
+
+  if (!addressInput || !DADATA_TOKEN || DADATA_TOKEN === 'YOUR_DADATA_TOKEN') {
+    return;
+  }
+
+  // Создаем контейнер для подсказок
+  const inputContainer = addressInput.parentElement;
+  inputContainer.style.position = 'relative';
+
+  const suggestionsList = createSuggestionsList();
+  inputContainer.appendChild(suggestionsList);
+
+  let debounceTimer;
+
+  // Функция для запроса к DaData API
+  function fetchSuggestions(query) {
+    return fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Token ${DADATA_TOKEN}`
+      },
+      body: JSON.stringify({
+        query: query,
+        count: 5
+      })
+    })
+      .then((response) => response.json())
+      .catch(() => ({ suggestions: [] }));
+  }
+
+  // Показываем подсказки
+  function showSuggestions(suggestions) {
+    suggestionsList.innerHTML = '';
+
+    if (suggestions.length === 0) {
+      suggestionsList.classList.remove('address-suggestions--visible');
+      return;
+    }
+
+    suggestions.forEach((suggestion) => {
+      const li = document.createElement('li');
+      li.className = 'address-suggestions__item';
+      li.textContent = suggestion.value;
+
+      li.addEventListener('click', () => {
+        selectSuggestion(suggestion);
+      });
+
+      suggestionsList.appendChild(li);
+    });
+
+    suggestionsList.classList.add('address-suggestions--visible');
+  }
+
+  // Выбираем подсказку
+  function selectSuggestion(suggestion) {
+    addressInput.value = suggestion.value;
+    suggestionsList.classList.remove('address-suggestions--visible');
+
+    // Получаем координаты
+    const coords = [
+      parseFloat(suggestion.data.geo_lat),
+      parseFloat(suggestion.data.geo_lon)
+    ];
+
+    // Добавляем маркер на карту
+    if (coords[0] && coords[1]) {
+      addPlacemark(coords, suggestion.value);
+    }
+
+    // Показываем лейбл
+    const label = addressInput.parentElement.querySelector('.contacts-personal__label');
+    if (label) {
+      label.classList.add('contacts-personal__label--visible');
+      addressInput.placeholder = '';
+    }
+  }
+
+  // Обработчик ввода
+  addressInput.addEventListener('input', function() {
+    const query = this.value.trim();
+
+    clearTimeout(debounceTimer);
+
+    if (query.length < 3) {
+      suggestionsList.classList.remove('address-suggestions--visible');
+      return;
+    }
+
+    debounceTimer = setTimeout(() => {
+      fetchSuggestions(query).then((data) => {
+        showSuggestions(data.suggestions || []);
+      });
+    }, 300);
+  });
+
+  // Скрываем подсказки при клике вне поля
+  document.addEventListener('click', (event) => {
+    if (!inputContainer.contains(event.target)) {
+      suggestionsList.classList.remove('address-suggestions--visible');
+    }
+  });
+}
+
+/* Валидация комментария */
+
+function initCommentValidation() {
+  const commentInput = document.querySelector('.comment__input');
+  const validationSpan = document.querySelector('.comment__validation');
+  const countSpan = document.querySelector('.comment__validation-count');
+
+  if (!commentInput || !validationSpan || !countSpan) {
+    return;
+  }
+
+  const maxLength = 142;
+
+  function updateValidation() {
+    const currentLength = commentInput.value.length;
+    countSpan.textContent = currentLength;
+
+    // Сброс классов
+    commentInput.classList.remove('comment__input--error', 'comment__input--warning');
+    validationSpan.classList.remove('comment__validation--error', 'comment__validation--warning');
+
+    if (currentLength > maxLength) {
+      // Превышен лимит
+      commentInput.classList.add('comment__input--error');
+      validationSpan.classList.add('comment__validation--error');
+    } else if (currentLength > maxLength - 20) {
+      // Предупреждение (осталось менее 20 символов)
+      commentInput.classList.add('comment__input--warning');
+      validationSpan.classList.add('comment__validation--warning');
+    }
+  }
+
+  // Обновляем при вводе
+  commentInput.addEventListener('input', updateValidation);
+
+  // Инициализируем при загрузке
+  updateValidation();
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  // Ждем загрузки Яндекс.Карт
+  const checkYandexMaps = () => {
+    if (typeof window.ymaps !== 'undefined') {
+      initYandexMap();
+    } else {
+      // Повторяем проверку через 500мс
+      setTimeout(checkYandexMaps, 500);
+    }
+  };
+
+  checkYandexMaps();
+
+  // Инициализируем DaData сразу (без jQuery)
+  initDaDataSuggestions();
+
+  // Инициализируем валидацию комментария
+  initCommentValidation();
+
+  // Инициализируем toggle переключатели
+  initToggleSwitches();
+
+  // Инициализируем форму подписки
+  initNewsletterForm();
+});
+
+/* Toggle переключатели */
+
+function initToggleSwitches() {
+  const toggles = document.querySelectorAll('.total__option-toggle-icon');
+
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', function() {
+      this.classList.toggle('total__option-toggle-icon--checked');
+    });
+  });
+}
+
+/* Форма подписки на новости */
+/*
+
+function initNewsletterForm() {
+  const form = document.querySelector('.footer__discount-form');
+  const input = document.querySelector('.footer__discount-input');
+  const button = document.querySelector('.footer__discount-button');
+
+  if (!form || !input || !button) {
+    return;
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = input.value.trim();
+
+    // Простая валидация email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      alert('Пожалуйста, введите email адрес');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      alert('Пожалуйста, введите корректный email адрес');
+      return;
+    }
+
+    // Имитация отправки
+    button.textContent = '✓';
+    button.style.backgroundColor = '#28a745';
+    input.value = '';
+    input.placeholder = 'Спасибо за подписку!';
+
+    // Возвращаем исходное состояние через 3 секунды
+    setTimeout(() => {
+      button.textContent = '→';
+      button.style.backgroundColor = '';
+      input.placeholder = 'Введите ваш email';
+    }, 3000);
+  });
+}
+
+*/
