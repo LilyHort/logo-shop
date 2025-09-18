@@ -101,6 +101,7 @@ function updateCartSummary() {
   const activeItems = document.querySelectorAll('.card__item:not(.card__item-deleted)');
   const basketCount = document.querySelector('.basket__count');
   const basketTotal = document.querySelector('.basket__total');
+  const totalFinalValue = document.querySelector('.total__final-value');
 
   let totalItems = 0;
   let totalPrice = 0;
@@ -124,6 +125,16 @@ function updateCartSummary() {
 
   if (basketTotal) {
     basketTotal.textContent = totalPrice.toLocaleString('ru-RU');
+  }
+
+  // Обновляем итоговую сумму в блоке total
+  if (totalFinalValue) {
+    const rubleSpan = totalFinalValue.querySelector('.ruble--total-price');
+    if (rubleSpan) {
+      totalFinalValue.innerHTML = `${totalPrice.toLocaleString('ru-RU')}&nbsp;${rubleSpan.outerHTML}`;
+    } else {
+      totalFinalValue.textContent = `${totalPrice.toLocaleString('ru-RU')} ₽`;
+    }
   }
 }
 

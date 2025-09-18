@@ -1,0 +1,26 @@
+.legal-information {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -16px;
+    right: -16px;
+    height: 0.5px;
+    background: $grey-2;
+  }
+}
+
+.legal-information__list {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: $grey-1;
+}
+
+
