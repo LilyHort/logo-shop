@@ -1,17 +1,64 @@
 .footer {
   font-family: $helvetica-family;
-  border-top: 0.50px solid $grey-2;
-  width: 100vw;
+  //border-top: 0.50px solid $grey-2;
+
+
+}
+
+.footer__wrapper {
+  padding: 24px 16px;
+
+  // @media (min-width: $desktop-width) {
+  //   max-width: 1300px;
+  // }
+
+  @media (min-width: $desktop-width) {
+    position: relative;
+  }
+
+  //   &::after {
+  //     content: "";
+  //     border-top: 0.5px solid red;
+  //     border-bottom: 0.5px solid red;
+  //     position: absolute;
+  //     bottom: 0;
+  //     left: calc(-50vw + 50%);
+  //     width: 100vw;
+  //     height: 0.5px;
+  //     background: $grey-2;
+  //   }
+  // }
+
 }
 
 .footer__main {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (min-width: $desktop-width) {
+   display: grid;
+   grid-template-columns: 2fr 1fr 1fr 1fr;
+   gap: 40px;
+   padding: 0 20px;
+
+
+   &::before {
+    content: "";
+    border-top: 0.5px solid $grey-2;
+    //border-bottom: 0.5px solid red;
+    position: absolute;
+   //bottom: 0;
+    left: calc(-50vw + 50%);
+    width: 100vw;
+    height: 0.5px;
+    background: $grey-2;
+ // }
 }
-.footer__wrapper {
-  padding: 24px 16px;
+
+  }
 }
+
 
 //Подписка
 .footer__discount {

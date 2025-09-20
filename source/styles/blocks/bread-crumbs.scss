@@ -1,9 +1,18 @@
 .bread-crumbs {
+  display: flex;
+  gap: 11px;
   font-family: $helvetica-family;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   color: $grey-1;
+  padding: 0 16px;
+  margin-bottom: 35px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 40px;
+
+  }
 }
 
 .bread-crumbs__current {

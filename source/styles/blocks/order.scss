@@ -1,11 +1,35 @@
+.order {
+  @media (min-width: $desktop-width) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
 .order__title {
   font-size: 28px;
+  margin: 0 0 10px;
+
+  @media (min-width: $desktop-width) {
+    font-size: 40px;
+    margin-right: 20px;
+  }
+}
+
+.order__header {
+  margin-bottom: 29px;
+
+  @media (min-width: $desktop-width) {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 60px;
+  }
 }
 
 .order__account {
 font-size: 14px;
 line-height: 18px;
 color: $grey-1;
+margin: 0;
 }
 
 .order__account-link {

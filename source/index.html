@@ -76,13 +76,37 @@
                   Магазины
                 </a>
               </li>
+              <li class="header__nav-main-item header__nav-main-item--desktop header__item">
+                <a class="header__link link-reset" href="#">
+                  <svg class="header__nav-user-icon header__nav-user-icon--mobile header__nav-user-icon--search" width="28" height="28">
+                    <use href="./icons/stack.svg#search"></use>
+                  </svg>
+                  <span class="header__nav-main-item-text">Поиск</span>
+                </a>
+              </li>
+              <li class="header__nav-main-item header__nav-main-item--desktop header__item">
+                <a class="header__link link-reset" href="#">
+                  <svg class="header__nav-user-icon header__nav-user-icon--mobile header__nav-user-icon--account" width="28" height="28">
+                    <use href="./icons/stack.svg#account"></use>
+                  </svg>
+                  <span class="header__nav-main-item-text">Войти</span>
+                </a>
+              </li>
+              <li class="header__nav-main-item header__nav-main-item--desktop header__item">
+                <a class="header__link link-reset" href="#">
+                  <svg class="header__nav-user-icon header__nav-user-icon--mobile header__nav-user-icon--favorite" width="28" height="28">
+                    <use href="./icons/stack.svg#favorite"></use>
+                  </svg>
+                  <span class="header__nav-main-item-text">Избранное</span>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
       </div>
     </header>
     <main class="main">
-      <div class="main__wrapper">
+
         <div class="bread-crumbs">
           <a class="bread-crumbs__link link-reset" href="#">
             Главная
@@ -95,11 +119,14 @@
           </span>
 
         </div>
+        <div class="main__wrapper">
 
         <section class="order">
           <div class="order__wrapper">
+            <div class="order__header">
             <h1 class="order__title title">Оформление заказа</h1>
             <p class="order__account">Есть аккаунт?<a class="order__account-link link-reset" href="#">Войти</a></p>
+            </div>
             <div class="basket">
               <div class="basket__wrapper">
                 <div class="basket__summary">
@@ -167,7 +194,7 @@
                           <li class="card__size-item">
                             <input class="card__size-input visually-hidden" type="radio" name="size-item-1" value="XL"
                               id="size_xl">
-                            <label class="card__size-label" for="size_xl">XL</label>
+                            <label class="card__size-label" for="size_xl">Xl</label>
                           </li>
                         </ul>
                       </fieldset>
@@ -340,27 +367,27 @@
                 <fieldset class="contacts-personal__fieldset fieldset-reset">
                   <legend class="contacts-personal__title form__title title">Контактные данные</legend>
                   <ul class="contacts-personal__list list-reset">
-                    <li class="contacts-personal__item">
+                    <li class="contacts-personal__item contacts-personal__item--name">
                       <label class="contacts-personal__label" for="name">Имя</label>
                       <input class="contacts-personal__input" type="text" name="name" id="name" placeholder="Имя"
                         required>
                     </li>
-                    <li class="contacts-personal__item">
+                    <li class="contacts-personal__item contacts-personal__item--surname">
                       <label class="contacts-personal__label" for="surname">Фамилия</label>
                       <input class="contacts-personal__input" type="text" name="surname" id="surname"
                         placeholder="Фамилия" required>
                     </li>
-                    <li class="contacts-personal__item">
+                    <li class="contacts-personal__item contacts-personal__item--phone">
                       <label class="contacts-personal__label" for="phone">Телефон</label>
                       <input class="contacts-personal__input" type="text" name="phone" id="phone" placeholder="Телефон"
                         required>
                     </li>
-                    <li class="contacts-personal__item">
+                    <li class="contacts-personal__item contacts-personal__item--email">
                       <label class="contacts-personal__label" for="email">Email</label>
                       <input class="contacts-personal__input" type="email" name="email" id="email" placeholder="Email"
                         required>
                     </li>
-                    <li class="contacts-personal__item">
+                    <li class="contacts-personal__item contacts-personal__item--address">
                       <label class="contacts-personal__label" for="address">Адрес доставки</label>
                       <input class="contacts-personal__input" type="text" name="address" id="address"
                         placeholder="Адрес доставки" required>
@@ -404,63 +431,65 @@
                   <span class="comment__validation">Использовано <span class="comment__validation-count">0</span>/142
                     символов</span>
                 </fieldset>
-                <div class="total">
-                  <div class="total__wrapper">
-                    <ul class="total__list list-reset">
-                      <li class="total__item total__item--products">
-                        <span class="total__label">Товары</span>
-                        <span class="total__price">24&nbsp;500 <span class="ruble ruble--total">₽
-                        </span></span>
-                      </li>
-                      <li class="total__item total__item--discount">
-                        <span class="total__label">Скидка</span>
-                        <span class="total__price accent-color">-&nbsp;4&nbsp;500 <span class="ruble ruble--discount">₽
-                        </span></span>
-                        <ul class="total__sub-list list-reset">
-                          <li class="total__sub-item">
-                            <span class="total__sublabel">Акции</span>
-                            <span class="total__subprice accent-color">-&nbsp;4&nbsp;000 <span class="ruble ruble--subprice">₽
-                            </span></span>
-                          </li>
-                          <li class="total__sub-item">
-                            <span class="total__sublabel">Промокод</span>
-                            <span class="total__subprice accent-color">-&nbsp;500 <span class="ruble ruble--subprice">₽
-                            </span></span>
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="total__item total__item--delivery">
-                        <span class="total__label">Доставка</span>
-                        <span class="total__price">200 <span class="ruble ruble--total">₽
-                        </span></span>
-                      </li>
-                    </ul>
-                    <div class="total__option">
-                      <div class="total__option-info">
-                        <span class="total__option-info-general">Получить товар со склада</span>
-                        <span class="total__option-info-additional">Сроки получения могут измениться</span>
-                      </div>
-                      <div class="total__option-toggle">
-                      <input class="total__option-toggle-input visually-hidden" type="checkbox" name="option"
-                      id="option">
-                      <span class="total__option-toggle-icon"></span>
-                      </div>
-                    </div>
-                    <div class="total__final">
-                      <span class="total__final-label">Итого:</span>
-                      <span class="total__final-value">20&nbsp;700 <span class="ruble ruble--total-price">₽
-                      </span></span>
-                    </div>
-                    <input class="total__input" type="text" name="promo" id="promo" placeholder="Введите промокод">
-                    <button class="total__button button-reset" type="submit">Оформить заказ</button>
-                    <p class="total__text">Нажимая кнопку “Оформить заказ”, Вы соглашаетесь с <a
-                        class="total__text-link link-reset" href="#">политикой конфиденциальности.</a></p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
-        </form>
+          </form>
+        </section>
+
+        <div class="total">
+        <div class="total__wrapper">
+          <ul class="total__list list-reset">
+            <li class="total__item total__item--products">
+              <span class="total__label">Товары</span>
+              <span class="total__price">24&nbsp;500 <span class="ruble ruble--total">₽
+              </span></span>
+            </li>
+            <li class="total__item total__item--discount">
+              <span class="total__label">Скидка</span>
+              <span class="total__price accent-color">-&nbsp;4&nbsp;500 <span class="ruble ruble--discount">₽
+              </span></span>
+              <ul class="total__sub-list list-reset">
+                <li class="total__sub-item">
+                  <span class="total__sublabel">Акции</span>
+                  <span class="total__subprice accent-color">-&nbsp;4&nbsp;000 <span class="ruble ruble--subprice">₽
+                  </span></span>
+                </li>
+                <li class="total__sub-item">
+                  <span class="total__sublabel">Промокод</span>
+                  <span class="total__subprice accent-color">-&nbsp;500 <span class="ruble ruble--subprice">₽
+                  </span></span>
+                </li>
+              </ul>
+            </li>
+            <li class="total__item total__item--delivery">
+              <span class="total__label">Доставка</span>
+              <span class="total__price">200 <span class="ruble ruble--total">₽
+              </span></span>
+            </li>
+          </ul>
+          <div class="total__option">
+            <div class="total__option-info">
+              <span class="total__option-info-general">Получить товар со склада</span>
+              <span class="total__option-info-additional">Сроки получения могут измениться</span>
+            </div>
+            <div class="total__option-toggle">
+            <input class="total__option-toggle-input visually-hidden" type="checkbox" name="option"
+            id="option">
+            <span class="total__option-toggle-icon"></span>
+            </div>
+          </div>
+          <div class="total__final">
+            <span class="total__final-label">Итого:</span>
+            <span class="total__final-value">20&nbsp;700 <span class="ruble ruble--total-price">₽
+            </span></span>
+          </div>
+          <input class="total__input" type="text" name="promo" id="promo" placeholder="Введите промокод">
+          <button class="total__button button-reset" type="submit">Оформить заказ</button>
+          <p class="total__text">Нажимая кнопку "Оформить заказ", Вы соглашаетесь с <a
+              class="total__text-link link-reset" href="#">политикой конфиденциальности.</a></p>
+        </div>
+      </div>
       </div>
     </main>
     <footer class="footer">

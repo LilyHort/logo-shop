@@ -1,3 +1,21 @@
+.basket {
+  @media (min-width: $desktop-width) {
+    grid-column: 1;
+  }
+}
+
+.basket__wrapper {
+  margin-bottom: 22px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 30px;
+  }
+}
+
+.basket__info {
+  margin: 0;
+}
+
 .basket__summary {
   font-size: 24px;
   line-height: 30px;

@@ -103,28 +103,63 @@ function updateCartSummary() {
   const basketTotal = document.querySelector('.basket__total');
   const totalFinalValue = document.querySelector('.total__final-value');
 
+  // Элементы блока total
+  const totalProductsPrice = document.querySelector('.total__item--products .total__price');
+  const totalDiscountPrice = document.querySelector('.total__item--discount .total__price');
+
   let totalItems = 0;
   let totalPrice = 0;
+  let totalOldPrice = 0;
 
   activeItems.forEach((item) => {
     const quantityInput = item.querySelector('.card__price-quantity-input');
     const priceTotal = item.querySelector('.card__price-total .card__price-current');
+    const priceTotalOld = item.querySelector('.card__price-total .card__price-old');
 
     if (quantityInput && priceTotal) {
       const quantity = parseInt(quantityInput.value, 10);
       const price = parseInt(priceTotal.textContent.replace(/[^\d]/g, ''), 10);
 
+      // Считаем старую цену, если есть
+      let oldPrice = 0;
+      if (priceTotalOld && !priceTotalOld.classList.contains('card__price-old--none')) {
+        oldPrice = parseInt(priceTotalOld.textContent.replace(/[^\d]/g, ''), 10);
+      }
+
       totalItems += quantity;
       totalPrice += price;
+      totalOldPrice += oldPrice;
     }
   });
 
+  // Обновляем корзину в header
   if (basketCount) {
     basketCount.textContent = totalItems;
   }
 
   if (basketTotal) {
     basketTotal.textContent = totalPrice.toLocaleString('ru-RU');
+  }
+
+  // Обновляем сумму товаров в блоке total
+  if (totalProductsPrice) {
+    const rubleSpan = totalProductsPrice.querySelector('.ruble--total');
+    if (rubleSpan) {
+      totalProductsPrice.innerHTML = `${totalPrice.toLocaleString('ru-RU')}&nbsp;${rubleSpan.outerHTML}`;
+    } else {
+      totalProductsPrice.textContent = `${totalPrice.toLocaleString('ru-RU')} ₽`;
+    }
+  }
+
+  // Обновляем скидку в блоке total
+  if (totalDiscountPrice && totalOldPrice > 0) {
+    const discount = totalOldPrice - totalPrice;
+    const rubleSpan = totalDiscountPrice.querySelector('.ruble--discount');
+    if (rubleSpan) {
+      totalDiscountPrice.innerHTML = `-&nbsp;${discount.toLocaleString('ru-RU')}&nbsp;${rubleSpan.outerHTML}`;
+    } else {
+      totalDiscountPrice.textContent = `- ${discount.toLocaleString('ru-RU')} ₽`;
+    }
   }
 
   // Обновляем итоговую сумму в блоке total
@@ -303,7 +338,74 @@ function initYandexMap() {
     yandexMap = new window.ymaps.Map(mapContainer, {
       center: [55.751574, 37.573856], // Москва
       zoom: 10,
-      controls: ['zoomControl', 'searchControl']
+      controls: ['zoomControl']
+    });
+
+    // Обработчик изменения размера окна для адаптации карты
+    let resizeTimeout;
+    let previousWidth = window.innerWidth;
+
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const currentWidth = window.innerWidth;
+
+        if (yandexMap && Math.abs(currentWidth - previousWidth) > 50) {
+          // Сохраняем текущее состояние карты
+          const currentCenter = yandexMap.getCenter();
+          const currentZoom = yandexMap.getZoom();
+          const currentPlacemarks = [];
+
+          // Сохраняем маркеры
+          yandexMap.geoObjects.each((geoObject) => {
+            if (geoObject.geometry.getType() === 'Point') {
+              currentPlacemarks.push({
+                coords: geoObject.geometry.getCoordinates(),
+                properties: geoObject.properties.getAll()
+              });
+            }
+          });
+
+          // Уничтожаем старую карту
+          yandexMap.destroy();
+
+          // Создаем новую карту
+          yandexMap = new window.ymaps.Map(mapContainer, {
+            center: currentCenter,
+            zoom: currentZoom,
+            controls: ['zoomControl']
+          });
+
+          // Восстанавливаем маркеры
+          currentPlacemarks.forEach((placemarkData) => {
+            const placemark = new window.ymaps.Placemark(placemarkData.coords, placemarkData.properties, {
+              preset: 'islands#blackDotIcon'
+            });
+            yandexMap.geoObjects.add(placemark);
+            mapPlacemark = placemark;
+          });
+
+          // Добавляем обработчик клика заново
+          yandexMap.events.add('click', (e) => {
+            const coords = e.get('coords');
+            addPlacemark(coords);
+
+            window.ymaps.geocode(coords).then((res) => {
+              const firstGeoObject = res.geoObjects.get(0);
+              const address = firstGeoObject.getAddressLine();
+              addressInput.value = address;
+
+              const label = addressInput.parentElement.querySelector('.contacts-personal__label');
+              if (label) {
+                label.classList.add('contacts-personal__label--visible');
+                addressInput.placeholder = '';
+              }
+            });
+          });
+
+          previousWidth = currentWidth;
+        }
+      }, 200);
     });
 
     // Обработчик клика по карте

@@ -10,6 +10,32 @@
     height: 0.5px;
     background: $grey-2;
   }
+
+  @media (min-width: $desktop-width) {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.legal-information__wrapper {
+  @media (min-width: $desktop-width) {
+
+
+
+    &::before {
+     content: "";
+     border-top: 0.5px solid $grey-2;
+     //border-bottom: 0.5px solid red;
+     position: absolute;
+    //bottom: 0;
+     left: calc(-50vw + 50%);
+     width: 100vw;
+     height: 0.5px;
+     background: $grey-2;
+  // }
+    }
+ }
 }
 
 .legal-information__list {
@@ -21,6 +47,11 @@
   line-height: 18px;
   font-weight: 400;
   color: $grey-1;
+
+  @media (min-width: $desktop-width) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 
