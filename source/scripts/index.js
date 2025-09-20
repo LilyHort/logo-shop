@@ -405,7 +405,7 @@ function initYandexMap() {
 
           previousWidth = currentWidth;
         }
-      }, 200);
+      }, 220);
     });
 
     // Обработчик клика по карте
@@ -448,7 +448,6 @@ function addPlacemark(coords, address = '') {
     hintContent: address || 'Выбранный адрес',
     balloonContent: address || 'Местоположение'
   }, {
-    // Вариант 1: Кастомная SVG иконка
     iconLayout: 'default#image',
     iconImageHref: `data:image/svg+xml;base64,${btoa(`
       <svg width="27" height="39" viewBox="0 0 27 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -457,7 +456,7 @@ function addPlacemark(coords, address = '') {
 </svg>
     `)}`,
 
-    iconImageSize: [32, 32],
+    iconImageSize: [27, 38],
     iconImageOffset: [-16, -16]
   });
 

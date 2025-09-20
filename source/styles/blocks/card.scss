@@ -4,10 +4,14 @@
   }
 }
 
+.card__list {
+  margin-bottom: 41px;
+}
+
 .card__item {
   position: relative;
   border-top: 0.50px solid $grey-2;
-  padding: 17px 0;
+  padding: 17px 0 16px;
 }
 
 .card__item:last-child {
@@ -23,6 +27,11 @@
   border: none;
   background: transparent;
   cursor: pointer;
+
+  &--restore {
+    top: 30px;
+    right: 9px;
+  }
 
   &::before,
   &::after {
@@ -84,6 +93,7 @@ color: $black;
 
 .card__size {
   border: none;
+  margin-bottom: 18px;
 }
 
 .card__size-list {
@@ -123,11 +133,12 @@ color: $black;
 
 .card__color {
   border: none;
+  margin-bottom: 19px;
 }
 
 .card__color-list {
   display: flex;
-  gap: 16px;
+  gap: 20px;
 }
 
 .card__color-item {
@@ -190,6 +201,14 @@ color: $black;
   max-width: 153px;
   background-color: $grey-3;
   border-radius: 5px;
+  padding: 0 16px;
+}
+
+.card__price-quantity-input {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
 }
 
 .card__price-quantity-input,
@@ -207,7 +226,7 @@ color: $black;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12px;
+    width: 14px;
     height: 2px;
     background-color: $black;
     border-radius: 2px;
@@ -230,13 +249,13 @@ color: $black;
   }
 
   &::before {
-    width: 12px;
+    width: 14px;
     height: 2px;
   }
 
   &::after {
     width: 2px;
-    height: 12px;
+    height: 14px;
   }
 }
 
@@ -244,16 +263,25 @@ color: $black;
 
 .card__item-deleted-wrapper {
   background-color: $grey-3;
-  padding: 12px 24px 12px 8px;
+  padding: 15px 24px 9px 8px;
 }
 
 .card__item-deleted-text {
   font-size: 14px;
   line-height: 18px;
   color: $grey-1;
+  margin: 0;
+  margin-bottom: 4px;
 }
 
 .card__item-deleted-name {
   font-weight: 700;
+}
+
+.card__item-deleted-button {
+font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: $black;
 }
 

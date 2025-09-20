@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin: 0;
 
   @media (min-width: $desktop-width) {
     display: grid;
@@ -21,12 +22,18 @@
 }
 
 .contacts-personal__label {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: $grey-1;
   display: none;
   position: absolute;
   background-color: $white;
-  left: 12px;
+  left: 16px;
   top: -10px;
-  color: $grey-1;
+  z-index: 1;
+  padding: 0 4px;
+  white-space: pre-line;
 
   &--visible {
     display: block;
@@ -39,14 +46,24 @@
   font-size: 16px;
   line-height: 21px;
   color: $black;
-  padding: 12px 16px;
+  padding: 11px 16px;
   box-sizing: border-box;
+  border: 1px solid $grey-2;
+  outline: none;
+
+  &:focus {
+    border-color: $grey-1;
+  }
 }
 
 .contacts-personal__map {
   width: 100%;
-  height: 200px;
-  margin-top: 8px;
+  height: 220px;
+  //margin: 16px 0 40px;
+
+  margin-top: 37px;
+  margin-bottom: 40px;
+  margin-bottom: 40px;
   border-radius: 4px;
   overflow: hidden;
   display: none;
