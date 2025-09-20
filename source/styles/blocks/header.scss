@@ -25,7 +25,7 @@
 
   @media (min-width: $desktop-width) {
     padding: 0;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: auto;
     margin-bottom: 50px;
   }
@@ -50,6 +50,7 @@
   @media (min-width: $desktop-width) {
     width: 100%;
     flex-direction: row-reverse;
+    padding: 8px 31px;
   }
 }
 
@@ -137,6 +138,7 @@
 }
 
 .header__nav-main-item {
+  padding: 15px;
   font-family: $helvetica-family;
   font-weight: 400;
   font-size: 16px;
@@ -150,6 +152,9 @@
 
   @media (min-width: $desktop-width) {
     border: none;
+    padding: 0;
+    font-size: 14px;
+    line-height: 18px;
 
     &:first-child {
       border-top: none;
@@ -169,12 +174,46 @@
   }
 }
 
-.header__nav-user-item--mobile {
+.header__nav-user-item .header__link {
+
+  @media (min-width: $desktop-width) {
+    padding: 16px;
+  }
+}
+
+.header__nav-user-item {
+
+&--mobile {
   display: none;
+}
 
   @media (min-width: $desktop-width) {
     display: block;
+    position: relative;
   }
+}
+
+.header__nav-user-item-count {
+  display: none;
+
+  @media (min-width: $desktop-width) {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  border-radius: 100px;
+  width: 15px;
+  height: 15px;
+  background-color: $black;
+  color: $white;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 }
 
 .header__nav-user-list {
@@ -185,6 +224,11 @@
 
 .header__nav-user-icon {
   &--mobile {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
     width: 20px;
     height: 20px;
   }

@@ -103,6 +103,10 @@ function updateCartSummary() {
   const basketTotal = document.querySelector('.basket__total');
   const totalFinalValue = document.querySelector('.total__final-value');
 
+  // Счетчики в header
+  const headerCartCount = document.querySelector('.header__nav-user-item:not(.header__nav-user-item--mobile) .header__nav-user-item-count');
+  const headerFavoriteCount = document.querySelector('.header__nav-user-item--mobile .header__nav-user-item-count');
+
   // Элементы блока total
   const totalProductsPrice = document.querySelector('.total__item--products .total__price');
   const totalDiscountPrice = document.querySelector('.total__item--discount .total__price');
@@ -170,6 +174,25 @@ function updateCartSummary() {
     } else {
       totalFinalValue.textContent = `${totalPrice.toLocaleString('ru-RU')} ₽`;
     }
+  }
+
+  // Обновляем счетчик корзины в header
+  if (headerCartCount) {
+    headerCartCount.textContent = totalItems;
+  }
+
+  // Обновляем счетчик избранного в header
+  updateFavoriteCount();
+}
+
+function updateFavoriteCount() {
+  const headerFavoriteCount = document.querySelector('.header__nav-user-item--mobile .header__nav-user-item-count');
+
+  // Пока статичное значение, можно расширить логикой избранного
+  const favoriteItems = 8; // Можно получать из localStorage или API
+
+  if (headerFavoriteCount) {
+    headerFavoriteCount.textContent = favoriteItems;
   }
 }
 
@@ -266,6 +289,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updatePrice(item);
   });
+
+  // Обновляем счетчик избранного
+  updateFavoriteCount();
 });
 
 /* Показ/скрытие лейблов в форме контактов */

@@ -3,6 +3,10 @@
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
+
+  @media (min-width: $desktop-width) {
+    padding: 0 31px;
+  }
 }
 
 .main__wrapper {
