@@ -17,24 +17,24 @@
 
   @media (min-width: $desktop-width) {
     display: grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 2fr 1fr;
     gap: 16px;
     align-items: start;
     position: relative;
     padding: 0 16px;
-    max-width: 100%;
-  }
+   // max-width: 100%;
 
-  @media (min-width: 1024px) {
-    grid-template-columns: 1fr 400px;
-    gap: 20px;
-    padding: 0 20px;
+
+    // CSS переменная для ширины правой колонки
+    --right-column-width: calc((100% - 16px) / 3);
   }
 
   @media (min-width: 1300px) {
     max-width: 1300px;
-    grid-template-columns: 800px 450px;
     margin: 0 auto;
     padding: 0 19px;
+
+    // CSS переменная для ширины правой колонки на больших экранах
+
   }
 }

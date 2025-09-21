@@ -11,7 +11,10 @@
     margin-bottom: 20px;
     z-index: 10;
     width: 100%;
-    max-width: 100%;
+   // max-width: 100%;
+
+    // CSS переменная для ширины total (для наследования картой)
+    --total-width: 100%;
   }
 }
 

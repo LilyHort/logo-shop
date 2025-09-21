@@ -1,3 +1,18 @@
+/* Синхронизация ширины карты с блоком total */
+function syncMapWidthWithTotal() {
+  const totalBlock = document.querySelector('.total');
+  const mapBlock = document.querySelector('.contacts-personal__map');
+
+  if (totalBlock && mapBlock && window.innerWidth >= 768) {
+    const totalWidth = totalBlock.offsetWidth;
+    mapBlock.style.setProperty('--total-width', `${totalWidth}px`);
+  }
+}
+
+// Вызываем при загрузке и изменении размера окна
+window.addEventListener('load', syncMapWidthWithTotal);
+window.addEventListener('resize', syncMapWidthWithTotal);
+
 /* Открытие и закрытие меню */
 const menuButton = document.querySelector('.header__nav-main-button');
 const navMainList = document.querySelector('.header__nav-main-list');

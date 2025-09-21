@@ -1,6 +1,13 @@
 .form {
+  /* Мобильная версия - обычный поток */
+
+  /* Десктопная версия - позиционирование в гриде */
   @media (min-width: $desktop-width) {
     grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
