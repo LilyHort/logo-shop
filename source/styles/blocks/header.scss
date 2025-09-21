@@ -238,7 +238,6 @@
   }
 }
 
-// Ховер для иконок через родительскую ссылку
 .header__link {
   @media (min-width: $desktop-width) {
     &:hover .header__nav-user-icon {

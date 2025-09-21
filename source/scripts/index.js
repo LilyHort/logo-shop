@@ -871,8 +871,6 @@ function collectOrderData(form) {
   console.log('Способ оплаты:', orderData.paymentMethod);
   console.log('Итоговая сумма:', orderData.totalAmount);
 
-  // Здесь можно добавить отправку данных на сервер
-  // sendOrderToServer(orderData);
 }
 
 /* Валидация комментария */
@@ -943,8 +941,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Инициализируем toggle переключатели
   initToggleSwitches();
 
-  // Инициализируем форму подписки
-  // initNewsletterForm();
 });
 
 /* Toggle переключатели */
