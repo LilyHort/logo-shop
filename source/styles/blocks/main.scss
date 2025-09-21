@@ -5,31 +5,36 @@
   overflow-x: hidden;
 
   @media (min-width: $desktop-width) {
-    padding: 0 31px;
+    padding: 0 20px;
   }
 }
 
 .main__wrapper {
   font-family: $helvetica-family;
   padding: 0 16px;
+  width: 100%;
+  box-sizing: border-box;
 
   @media (min-width: $desktop-width) {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 380px;
+    gap: 16px;
     align-items: start;
     position: relative;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 400px;
+    gap: 20px;
     padding: 0 20px;
   }
 
   @media (min-width: 1300px) {
-    width: 100%;
     max-width: 1300px;
-    grid-template-columns: 800px 350px;
+    grid-template-columns: 800px 450px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 19px;
   }
-
-
-
 }

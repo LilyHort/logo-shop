@@ -16,7 +16,8 @@
   @media (min-width: $desktop-width) {
     display: grid;
     grid-template-columns: 130px 1fr 2fr;
-    padding: 25px 0;
+    padding: 25px 0 7px;
+    max-width: 760px;
   }
 }
 
@@ -28,7 +29,7 @@
   @media (min-width: $desktop-width) {
     display: flex;
     flex-direction: column;
-    margin-left: 23px;
+    margin-left: 20px;
   }
 }
 
@@ -73,6 +74,16 @@
   &::after {
     transform: translate(-50%, -50%) rotate(-45deg);
   }
+
+  @media (min-width: $desktop-width) {
+    top: 25px;
+    right: 1px;
+
+    &--restore {
+      top: 41px;
+      right: 26px;
+    }
+  }
 }
 
 .card__link {
@@ -94,6 +105,7 @@ padding-right: 25px;
 }
 
 @media (min-width: $desktop-width) {
+  padding: 0;
 
   &--mobile {
     display: none;
@@ -236,6 +248,9 @@ color: $black;
 
   @media (min-width: $desktop-width) {
     align-items: flex-start;
+    gap: 30px;
+    margin-left: 17px;
+
   }
 }
 
@@ -327,9 +342,21 @@ color: $black;
 
 /* Удаленный товар */
 
+.card__item-deleted {
+  padding: 25px 0 23px;
+}
+
 .card__item-deleted-wrapper {
   background-color: $grey-3;
   padding: 15px 24px 9px 8px;
+
+  @media (min-width: $desktop-width) {
+    grid-column: 1/-1;
+    display: flex;
+    gap: 26px;
+    padding: 18px 25px 10px;
+    align-items: baseline;
+  }
 }
 
 .card__item-deleted-text {
@@ -338,6 +365,11 @@ color: $black;
   color: $grey-1;
   margin: 0;
   margin-bottom: 4px;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 21px;
+  }
 }
 
 .card__item-deleted-name {

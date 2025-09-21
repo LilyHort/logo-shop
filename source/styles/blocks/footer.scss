@@ -31,6 +31,13 @@
 
 }
 
+.footer__more-links {
+  @media (min-width: $desktop-width) {
+    display: flex;
+    gap: 100px;
+  }
+}
+
 .footer__main {
   display: flex;
   flex-direction: column;
@@ -38,9 +45,10 @@
 
   @media (min-width: $desktop-width) {
    display: grid;
-   grid-template-columns: 2fr 1fr 1fr 1fr;
-   gap: 40px;
+   grid-template-columns: 1fr 2fr;
+   gap: 150px;
    padding: 0 20px;
+   max-width: 1300px;
 
 
    &::before {

@@ -4,6 +4,10 @@
 
 .comment__legend {
   margin-bottom: 19px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 28px;
+  }
 }
 
 .comment__input {
@@ -29,6 +33,12 @@
     border-color: #e74c3c;
   }
 
+  @media (min-width: $desktop-width) {
+    max-width: 760px;
+    height: 141px;
+    padding: 13px 19px;
+margin-bottom: -2px;
+  }
 }
 
 .comment__validation {
@@ -46,4 +56,7 @@
     color: #e74c3c;
   }
 
+  @media (min-width: $desktop-width) {
+    padding-left: 20px;
+  }
 }
