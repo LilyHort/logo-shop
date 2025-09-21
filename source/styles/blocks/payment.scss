@@ -45,6 +45,14 @@
   }
 }
 
+.payment__item:hover {
+  .payment__label-icon,
+  .payment__label-text {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+}
+
 .payment__input:checked ~ .payment__label-icon::after {
   opacity: 1;
 }
