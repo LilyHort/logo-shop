@@ -178,6 +178,7 @@ color: $black;
   justify-content: center;
   box-sizing: border-box;
   color: $black;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &--active {
     background-color: $black;
@@ -186,6 +187,7 @@ color: $black;
 
   &--none {
     color: $grey-2;
+    pointer-events: none;
   }
 
   &:hover {
@@ -222,6 +224,7 @@ color: $black;
   box-sizing: border-box;
   background-color: $grey-3;
   color: $grey-3;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &--black {
     background-color: $black-product;
@@ -328,6 +331,7 @@ color: $black;
 
 .card__price-quantity-button--minus {
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &::before {
     content: "";
@@ -358,6 +362,7 @@ color: $black;
 
 .card__price-quantity-button--plus {
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &::before,
   &::after {

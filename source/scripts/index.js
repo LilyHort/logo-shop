@@ -13,193 +13,6 @@ function syncMapWidthWithTotal() {
 window.addEventListener('load', syncMapWidthWithTotal);
 window.addEventListener('resize', syncMapWidthWithTotal);
 
-/* Валидация форм только при отправке */
-function validateInput(input) {
-  const value = input.value.trim();
-  const type = input.type;
-  const required = input.hasAttribute('required');
-
-  // Убираем предыдущие ошибки
-  input.classList.remove('error');
-  const existingError = input.parentNode.querySelector('.contacts-personal__error, .total__error, .footer__error');
-  if (existingError) {
-    existingError.remove();
-  }
-
-  let isValid = true;
-  let errorMessage = '';
-
-  // Проверка обязательных полей
-  if (required && !value) {
-    isValid = false;
-    errorMessage = 'Это поле обязательно для заполнения';
-  }
-
-  // Проверка email
-  if (type === 'email' && value) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      isValid = false;
-      errorMessage = 'Введите корректный email адрес';
-    }
-  }
-
-  // Проверка телефона
-  if (input.name === 'phone' && value) {
-    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
-    if (!phoneRegex.test(value)) {
-      isValid = false;
-      errorMessage = 'Введите корректный номер телефона';
-    }
-  }
-
-  // Показываем ошибку если есть
-  if (!isValid) {
-    input.classList.add('error');
-    showErrorMessage(input, errorMessage);
-  }
-
-  return isValid;
-}
-
-function showErrorMessage(input, message) {
-  const errorDiv = document.createElement('div');
-
-  // Определяем класс ошибки в зависимости от родительского элемента
-  if (input.closest('.contacts-personal')) {
-    errorDiv.className = 'contacts-personal__error show';
-  } else if (input.closest('.total')) {
-    errorDiv.className = 'total__error show';
-  } else if (input.closest('.footer')) {
-    errorDiv.className = 'footer__error show';
-  }
-
-  errorDiv.textContent = message;
-  input.parentNode.appendChild(errorDiv);
-}
-
-function showSuccessMessage(input, message) {
-  const successDiv = document.createElement('div');
-  successDiv.className = 'total__success show';
-  successDiv.innerHTML = message;
-  input.parentNode.appendChild(successDiv);
-}
-
-// Валидация купона
-function validatePromoCode(promoInput) {
-  const promoValue = promoInput.value.trim().toUpperCase();
-
-  // Убираем предыдущие сообщения
-  const existingError = promoInput.parentNode.querySelector('.total__error');
-  const existingSuccess = promoInput.parentNode.querySelector('.total__success');
-  if (existingError) {
-    existingError.remove();
-  }
-  if (existingSuccess) {
-    existingSuccess.remove();
-  }
-
-  // Список валидных купонов
-  const validPromoCodes = ['1B6D9FC', 'DISCOUNT10', 'SAVE20', 'WELCOME'];
-
-  if (promoValue && validPromoCodes.includes(promoValue)) {
-    // Купон валиден
-    promoInput.classList.remove('error');
-    showSuccessMessage(promoInput, `<span class="valid-ok">${promoValue}</span> - купон применен`);
-    return true;
-  } else if (promoValue) {
-    // Купон невалиден
-    promoInput.classList.add('error');
-    showErrorMessage(promoInput, 'Неверный промокод');
-    return false;
-  }
-
-  // Поле пустое - убираем все сообщения
-  promoInput.classList.remove('error');
-  return true;
-}
-
-// Валидация только при отправке формы
-document.addEventListener('DOMContentLoaded', () => {
-  const forms = document.querySelectorAll('form');
-  forms.forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      let isFormValid = true;
-      const formInputs = form.querySelectorAll('input[required]');
-
-      // Очищаем предыдущие ошибки
-      formInputs.forEach((input) => {
-        input.classList.remove('error');
-        const existingError = input.parentNode.querySelector('.contacts-personal__error, .total__error, .footer__error');
-        if (existingError) {
-          existingError.remove();
-        }
-      });
-
-      // Валидируем все поля
-      formInputs.forEach(input => {
-        if (!validateInput(input)) {
-          isFormValid = false;
-        }
-      });
-
-      if (!isFormValid) {
-        event.preventDefault();
-      } else {
-      // Если форма валидна, собираем данные в FormData
-      const formData = collectFormData();
-
-      // Выводим данные в console.log
-      console.log('=== ДАННЫЕ ЗАКАЗА ===');
-      console.log('FormData объект:', formData);
-
-      // Выводим данные в удобном формате
-      console.log('=== КОНТАКТНЫЕ ДАННЫЕ ===');
-      console.log('Имя:', formData.get('name'));
-      console.log('Фамилия:', formData.get('surname'));
-      console.log('Телефон:', formData.get('phone'));
-      console.log('Email:', formData.get('email'));
-      console.log('Адрес:', formData.get('address'));
-
-      console.log('=== СПОСОБ ОПЛАТЫ ===');
-      console.log('Оплата:', formData.get('payment'));
-
-      console.log('=== ДОПОЛНИТЕЛЬНО ===');
-      console.log('Комментарий:', formData.get('comment') || 'Не указан');
-      console.log('Промокод:', formData.get('promo') || 'Не указан');
-      console.log('Получить со склада:', formData.get('getFromWarehouse') === 'true' ? 'Да' : 'Нет');
-
-      console.log('=== ТОВАРЫ В КОРЗИНЕ ===');
-      const cartItems = JSON.parse(formData.get('cartItems'));
-      cartItems.forEach((item, index) => {
-        console.log(`Товар ${index + 1}:`, item);
-      });
-
-      console.log('=== ИТОГОВЫЕ СУММЫ ===');
-      const totals = JSON.parse(formData.get('totals'));
-      console.log('Суммы:', totals);
-
-      console.log('=== КОНЕЦ ДАННЫХ ЗАКАЗА ===');
-    }
-  });
-
-  // Валидация промокода при вводе
-  const promoInput = document.querySelector('#promo');
-  if (promoInput) {
-    promoInput.addEventListener('input', function() {
-      // Небольшая задержка для валидации
-      clearTimeout(this.validationTimeout);
-      this.validationTimeout = setTimeout(() => {
-        validatePromoCode(this);
-      }, 500);
-    });
-
-    promoInput.addEventListener('blur', function() {
-      validatePromoCode(this);
-    });
-  }
-});
-
 /* Открытие и закрытие меню */
 const menuButton = document.querySelector('.header__nav-main-button');
 const navMainList = document.querySelector('.header__nav-main-list');
@@ -224,16 +37,36 @@ menuButton.addEventListener('click', toggleMenu);
 
 /* Выбор размера*/
 
-const cardSizeItem = document.querySelectorAll('.card__size-item');
+const cardSizeItems = document.querySelectorAll('.card__size-item');
 
 function toggleCardSizeItem() {
-  cardSizeItem.forEach((item) => {
+  // Проверяем, не является ли размер недоступным для выбора
+  if (this.classList.contains('card__size-item--none')) {
+    return; // Не выполняем выбор, если размер недоступен
+  }
+
+  // Находим все размеры в той же карточке товара
+  const currentCard = this.closest('.card__item');
+  const cardSizeItemsInCurrentCard = currentCard.querySelectorAll('.card__size-item');
+
+  // Убираем активный класс со всех размеров в текущей карточке
+  cardSizeItemsInCurrentCard.forEach((item) => {
     item.classList.remove('card__size-item--active');
+    const sizeLabel = item.querySelector('.card__size-label');
+    if (sizeLabel) {
+      sizeLabel.classList.remove('card__size-label--active');
+    }
   });
+
+  // Добавляем активный класс к выбранному размеру
   this.classList.add('card__size-item--active');
+  const selectedSizeLabel = this.querySelector('.card__size-label');
+  if (selectedSizeLabel) {
+    selectedSizeLabel.classList.add('card__size-label--active');
+  }
 }
 
-cardSizeItem.forEach((item) => {
+cardSizeItems.forEach((item) => {
   item.addEventListener('click', toggleCardSizeItem);
 });
 
@@ -242,10 +75,25 @@ cardSizeItem.forEach((item) => {
 const cardColorItem = document.querySelectorAll('.card__color-item');
 
 function toggleCardColorItem() {
-  cardColorItem.forEach((item) => {
+  // Находим все цвета в той же карточке товара
+  const currentCard = this.closest('.card__item');
+  const cardColorItemsInCurrentCard = currentCard.querySelectorAll('.card__color-item');
+
+  // Убираем активный класс со всех цветов в текущей карточке
+  cardColorItemsInCurrentCard.forEach((item) => {
     item.classList.remove('card__color-item--active');
+    const colorLabel = item.querySelector('.card__color-label');
+    if (colorLabel) {
+      colorLabel.classList.remove('card__color-label--active');
+    }
   });
+
+  // Добавляем активный класс к выбранному цвету
   this.classList.add('card__color-item--active');
+  const selectedColorLabel = this.querySelector('.card__color-label');
+  if (selectedColorLabel) {
+    selectedColorLabel.classList.add('card__color-label--active');
+  }
 }
 
 cardColorItem.forEach((item) => {
@@ -307,7 +155,6 @@ function updateCartSummary() {
 
   // Счетчики в header
   const headerCartCount = document.querySelector('.header__nav-user-item:not(.header__nav-user-item--mobile) .header__nav-user-item-count');
-  const headerFavoriteCount = document.querySelector('.header__nav-user-item--mobile .header__nav-user-item-count');
 
   // Элементы блока total
   const totalProductsPrice = document.querySelector('.total__item--products .total__price');
@@ -689,14 +536,7 @@ function addPlacemark(coords, address = '') {
   });
 
   yandexMap.geoObjects.add(mapPlacemark);
-
-  // Улучшенное центрирование карты на маркере
-  if (coords && coords.length === 2 &&
-      typeof coords[0] === 'number' &&
-      typeof coords[1] === 'number') {
-    yandexMap.setCenter(coords);
-    yandexMap.setZoom(15);
-  }
+  yandexMap.setCenter(coords, 15);
 
   // Показываем карту
   const mapContainer = document.querySelector('.contacts-personal__map');
@@ -728,7 +568,6 @@ function initDaDataSuggestions() {
   inputContainer.appendChild(suggestionsList);
 
   let debounceTimer;
-  let geocodeTimer;
 
   // Функция для запроса к DaData API
   function fetchSuggestions(query) {
@@ -801,73 +640,17 @@ function initDaDataSuggestions() {
     const query = this.value.trim();
 
     clearTimeout(debounceTimer);
-    clearTimeout(geocodeTimer);
 
     if (query.length < 3) {
       suggestionsList.classList.remove('address-suggestions--visible');
       return;
     }
 
-    // Показываем подсказки DaData
     debounceTimer = setTimeout(() => {
       fetchSuggestions(query).then((data) => {
         showSuggestions(data.suggestions || []);
       });
     }, 300);
-
-    // Автоматическое геокодирование введенного адреса
-    geocodeTimer = setTimeout(() => {
-      if (window.ymaps) {
-        window.ymaps.geocode(query).then((res) => {
-          const firstGeoObject = res.geoObjects.get(0);
-          if (firstGeoObject) {
-            const coords = firstGeoObject.geometry.getCoordinates();
-            const address = firstGeoObject.getAddressLine();
-
-            // Добавляем маркер на карту
-            addPlacemark(coords, address);
-          }
-        }).catch(() => {
-          // Игнорируем ошибки геокодирования
-        });
-      }
-    }, 1000); // Геокодируем через 1 секунду после ввода
-  });
-
-  // Обработчик для геокодирования введенного адреса
-  addressInput.addEventListener('blur', function() {
-    const query = this.value.trim();
-
-    if (query.length >= 3) {
-      // Геокодируем введенный адрес через Яндекс.Карты
-      window.ymaps.geocode(query).then((res) => {
-        const firstGeoObject = res.geoObjects.get(0);
-        if (firstGeoObject) {
-          const coords = firstGeoObject.geometry.getCoordinates();
-          const address = firstGeoObject.getAddressLine();
-
-          // Добавляем маркер на карту
-          addPlacemark(coords, address);
-
-          // Показываем лейбл
-          const label = addressInput.parentElement.querySelector('.contacts-personal__label');
-          if (label) {
-            label.classList.add('contacts-personal__label--visible');
-            addressInput.placeholder = '';
-          }
-        }
-      }).catch(() => {
-        // Игнорируем ошибки геокодирования
-      });
-    }
-  });
-
-  // Обработчик для Enter
-  addressInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      this.blur(); // Вызываем blur для геокодирования
-    }
   });
 
   // Скрываем подсказки при клике вне поля
@@ -875,6 +658,100 @@ function initDaDataSuggestions() {
     if (!inputContainer.contains(event.target)) {
       suggestionsList.classList.remove('address-suggestions--visible');
     }
+  });
+}
+
+/* Валидация форм */
+
+function validateInput(input) {
+  const value = input.value.trim();
+  const type = input.type;
+  const required = input.hasAttribute('required');
+
+  // Убираем предыдущие ошибки
+  input.classList.remove('error');
+  const existingError = input.parentNode.querySelector('.contacts-personal__error');
+  if (existingError) {
+    existingError.remove();
+  }
+
+  let isValid = true;
+  let errorMessage = '';
+
+  // Проверка обязательных полей
+  if (required && !value) {
+    isValid = false;
+    errorMessage = 'Это поле обязательно для заполнения';
+  }
+
+  // Проверка имени (только буквы и пробелы)
+  if (input.name === 'name' && value) {
+    const nameRegex = /^[а-яё\s]+$/i;
+    if (!nameRegex.test(value)) {
+      isValid = false;
+      errorMessage = 'Используйте только буквы';
+    }
+  }
+
+  // Проверка фамилии (только буквы и пробелы)
+  if (input.name === 'surname' && value) {
+    const nameRegex = /^[а-яё\s]+$/i;
+    if (!nameRegex.test(value)) {
+      isValid = false;
+      errorMessage = 'Используйте только буквы';
+    }
+  }
+
+  // Проверка email
+  if (type === 'email' && value) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      isValid = false;
+      errorMessage = 'Введите корректный email адрес';
+    }
+  }
+
+  // Проверка телефона
+  if (input.name === 'phone' && value) {
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    if (!phoneRegex.test(value)) {
+      isValid = false;
+      errorMessage = 'Введите корректный номер телефона';
+    }
+  }
+
+  // Показываем ошибку если есть
+  if (!isValid) {
+    input.classList.add('error');
+    showErrorMessage(input, errorMessage);
+  }
+
+  return isValid;
+}
+
+function showErrorMessage(input, message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'contacts-personal__error show';
+  errorDiv.textContent = message;
+  input.parentNode.appendChild(errorDiv);
+}
+
+function initFormValidation() {
+  const formInputs = document.querySelectorAll('.contacts-personal__input');
+
+  formInputs.forEach((input) => {
+    // Валидация при потере фокуса
+    input.addEventListener('blur', function() {
+      validateInput(this);
+    });
+
+    // Валидация при вводе (с задержкой)
+    input.addEventListener('input', function() {
+      clearTimeout(this.validationTimeout);
+      this.validationTimeout = setTimeout(() => {
+        validateInput(this);
+      }, 500);
+    });
   });
 }
 
@@ -934,101 +811,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Инициализируем DaData сразу (без jQuery)
   initDaDataSuggestions();
 
+  // Инициализируем валидацию форм
+  initFormValidation();
+
   // Инициализируем валидацию комментария
   initCommentValidation();
 
   // Инициализируем toggle переключатели
   initToggleSwitches();
+
+  // Инициализируем форму подписки
+  // initNewsletterForm();
 });
-
-// Функция для сбора данных о товарах в корзине
-function collectCartItems() {
-  const cartItems = [];
-  const cardItems = document.querySelectorAll('.card__item:not(.card__item-deleted)');
-
-  cardItems.forEach((item, index) => {
-    const itemData = {
-      id: index + 1,
-      title: item.querySelector('.card__title').textContent.trim(),
-      image: item.querySelector('.card__image').src,
-      size: item.querySelector('input[name*="size"]:checked')?.value || '',
-      color: item.querySelector('input[name*="color"]:checked')?.value || '',
-      quantity: parseInt(item.querySelector('.card__price-quantity-input').value) || 1,
-      price: {
-        old: item.querySelector('.card__price-old')?.textContent.replace(/[^\d]/g, '') || '0',
-        current: item.querySelector('.card__price-current').textContent.replace(/[^\d]/g, '') || '0'
-      }
-    };
-
-    cartItems.push(itemData);
-  });
-
-  return cartItems;
-}
-
-// Функция для сбора итоговых сумм
-function collectTotals() {
-  const totals = {
-    products: document.querySelector('.total__item--products .total__price').textContent.replace(/[^\d]/g, '') || '0',
-    discount: {
-      total: document.querySelector('.total__item--discount .total__price').textContent.replace(/[^\d]/g, '') || '0',
-      promotions: document.querySelector('.total__sub-item:first-child .total__subprice').textContent.replace(/[^\d]/g, '') || '0',
-      promo: document.querySelector('.total__sub-item:last-child .total__subprice').textContent.replace(/[^\d]/g, '') || '0'
-    },
-    delivery: document.querySelector('.total__item--delivery .total__price').textContent.replace(/[^\d]/g, '') || '0',
-    final: document.querySelector('.total__final-value').textContent.replace(/[^\d]/g, '') || '0'
-  };
-
-  return totals;
-}
-
-// Функция для сбора всех данных заказа в FormData
-function collectFormData() {
-  const formData = new FormData();
-
-  // 1. Контактные данные
-  const name = document.querySelector('#name').value;
-  const surname = document.querySelector('#surname').value;
-  const phone = document.querySelector('#phone').value;
-  const email = document.querySelector('#email').value;
-  const address = document.querySelector('#address').value;
-
-  formData.append('name', name);
-  formData.append('surname', surname);
-  formData.append('phone', phone);
-  formData.append('email', email);
-  formData.append('address', address);
-
-  // 2. Способ оплаты
-  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-  formData.append('payment', paymentMethod);
-
-  // 3. Комментарий к заказу
-  const comment = document.querySelector('#comment').value;
-  if (comment) {
-    formData.append('comment', comment);
-  }
-
-  // 4. Промокод
-  const promoCode = document.querySelector('#promo').value;
-  if (promoCode) {
-    formData.append('promo', promoCode);
-  }
-
-  // 5. Опция "Получить товар со склада"
-  const getFromWarehouse = document.querySelector('#option').checked;
-  formData.append('getFromWarehouse', getFromWarehouse);
-
-  // 6. Данные о товарах в корзине
-  const cartItems = collectCartItems();
-  formData.append('cartItems', JSON.stringify(cartItems));
-
-  // 7. Итоговые суммы
-  const totals = collectTotals();
-  formData.append('totals', JSON.stringify(totals));
-
-  return formData;
-}
 
 /* Toggle переключатели */
 
@@ -1041,3 +835,50 @@ function initToggleSwitches() {
     });
   });
 }
+
+/* Форма подписки на новости */
+/*
+
+function initNewsletterForm() {
+  const form = document.querySelector('.footer__discount-form');
+  const input = document.querySelector('.footer__discount-input');
+  const button = document.querySelector('.footer__discount-button');
+
+  if (!form || !input || !button) {
+    return;
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = input.value.trim();
+
+    // Простая валидация email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      alert('Пожалуйста, введите email адрес');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      alert('Пожалуйста, введите корректный email адрес');
+      return;
+    }
+
+    // Имитация отправки
+    button.textContent = '✓';
+    button.style.backgroundColor = '#28a745';
+    input.value = '';
+    input.placeholder = 'Спасибо за подписку!';
+
+    // Возвращаем исходное состояние через 3 секунды
+    setTimeout(() => {
+      button.textContent = '→';
+      button.style.backgroundColor = '';
+      input.placeholder = 'Введите ваш email';
+    }, 3000);
+  });
+}
+
+*/
