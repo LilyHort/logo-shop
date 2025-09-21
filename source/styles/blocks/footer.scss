@@ -97,9 +97,11 @@ color: $black;
   box-sizing: border-box;
   background: $white;
   color: $black;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &::placeholder {
     color: $grey-1;
+    transition: color 0.3s ease;
   }
 
   &:focus {
@@ -161,7 +163,7 @@ color: $black;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     color: $grey-2;
@@ -177,6 +179,7 @@ color: $black;
 
   &:hover {
     opacity: 0.3;
+    transition: opacity 0.3s ease;
   }
 }
 

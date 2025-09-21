@@ -168,6 +168,7 @@
 
 .header__link {
   padding: 12px 16px;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 
   @media (min-width: $desktop-width) {
     padding: 10px 20px;

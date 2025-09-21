@@ -18,6 +18,7 @@
 
   &--visible {
     display: block;
+    transition: display 0.3s ease;
   }
 
   &__item {
@@ -27,7 +28,7 @@
     font-size: 14px;
     line-height: 18px;
     color: $black;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease;
 
     &:last-child {
       border-bottom: none;

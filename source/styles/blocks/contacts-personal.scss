@@ -54,9 +54,11 @@
   border: 1px solid $grey-2;
   outline: none;
   cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
 
   &:focus {
     border-color: $grey-1;
+    transition: border-color 0.3s ease, color 0.3s ease;
   }
 
 
@@ -66,6 +68,7 @@
 
     &::placeholder {
       color: #ff4444;
+      transition: color 0.3s ease;
     }
   }
 
@@ -78,6 +81,7 @@
 
       &::placeholder {
         color: $grey-2;
+        transition: color 0.3s ease;
       }
     }
   }
@@ -93,6 +97,7 @@
 
   &.show {
     display: block;
+    transition: display 0.3s ease;
   }
 }
 
@@ -111,6 +116,7 @@
 
   &--visible {
     display: block;
+    transition: display 0.3s ease;
   }
 
   @media (min-width: $desktop-width) {
@@ -122,5 +128,6 @@
     height: 300px;
     margin-top: 0;
     z-index: 1000;
+    transition: width 0.3s ease, height 0.3s ease;
   }
 }

@@ -22,15 +22,17 @@
   box-sizing: border-box;
   width: 100%;
   height: 121px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.3s ease, color 0.3s ease;
 
   &:focus {
     outline: none;
     border-color: $black;
+    transition: border-color 0.3s ease, color 0.3s ease;
   }
 
   &.comment__input--error {
     border-color: #e74c3c;
+    transition: border-color 0.3s ease, color 0.3s ease;
   }
 
   @media (min-width: $desktop-width) {
@@ -44,6 +46,7 @@
 
       &::placeholder {
         color: $grey-2;
+        transition: color 0.3s ease;
       }
     }
   }
@@ -62,6 +65,7 @@
 
   &--error {
     color: #e74c3c;
+    transition: color 0.3s ease;
   }
 
   @media (min-width: $desktop-width) {

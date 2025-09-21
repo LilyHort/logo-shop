@@ -211,6 +211,7 @@
   padding: 11px 16px;
   margin-bottom: 12px;
   cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
 
 
   // Стили для валидации с кастомными сообщениями
@@ -228,9 +229,12 @@
 
     &:hover {
       border-color: $grey-2;
+      transition: border-color 0.3s ease, color 0.3s ease;
+      color: $grey-2;
 
       &::placeholder {
         color:  $grey-2;
+        transition: color 0.3s ease;
       }
     }
   }
@@ -261,11 +265,13 @@
 
   &.show {
     display: block;
+    transition: display 0.3s ease;
   }
 
   .valid-ok {
     font-weight: 700;
     color: #28a745;
+    transition: color 0.3s ease;
   }
 }
 
@@ -284,11 +290,13 @@
     &:hover {
       background-color: $grey-2;
       color: $grey-1;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     &:active {
       background-color: $grey-1;
       color: $white;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
   }
 }
