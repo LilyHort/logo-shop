@@ -1,34 +1,13 @@
 .footer {
   font-family: $helvetica-family;
-  //border-top: 0.50px solid $grey-2;
-
-
 }
 
 .footer__wrapper {
   padding: 24px 16px 0;
 
-  // @media (min-width: $desktop-width) {
-  //   max-width: 1300px;
-  // }
-
   @media (min-width: $desktop-width) {
     position: relative;
   }
-
-  //   &::after {
-  //     content: "";
-  //     border-top: 0.5px solid red;
-  //     border-bottom: 0.5px solid red;
-  //     position: absolute;
-  //     bottom: 0;
-  //     left: calc(-50vw + 50%);
-  //     width: 100vw;
-  //     height: 0.5px;
-  //     background: $grey-2;
-  //   }
-  // }
-
 }
 
 .footer__more-links {
@@ -51,22 +30,17 @@
    max-width: 1300px;
 
 
-   &::before {
-    content: "";
-    border-top: 0.5px solid $grey-2;
-    //border-bottom: 0.5px solid red;
-    position: absolute;
-   //bottom: 0;
-    left: calc(-50vw + 50%);
-    width: 100vw;
-    height: 0.5px;
-    background: $grey-2;
- // }
-}
-
+    &::before {
+      content: "";
+      border-top: 0.5px solid $grey-2;
+      position: absolute;
+      left: calc(-50vw + 50%);
+      width: 100vw;
+      height: 0.5px;
+      background: $grey-2;
+    }
   }
 }
-
 
 //Подписка
 .footer__discount {
@@ -124,11 +98,9 @@ color: $black;
     }
   }
 
-
   // Стили для валидации с кастомными сообщениями
   &.error {
     border-color: #ff4444;
-
   }
 }
 
@@ -204,84 +176,3 @@ color: $black;
   line-height: 18px;
   font-weight: 400;
 }
-
-
-
-/*
-.footer {
-  background-color: $black;
-  color: $white;
-  padding: 40px 0;
-}
-
-.footer__wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.footer__discount-title {
-  text-align: center;
-  margin-bottom: 24px;
-  color: $white;
-}
-
-.footer__discount-form {
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.footer__discount-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.footer__discount-input {
-  width: 100%;
-  padding: 16px 60px 16px 20px;
-  border: 1px solid $grey-2;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 21px;
-  box-sizing: border-box;
-  background: $white;
-  color: $black;
-
-  &::placeholder {
-    color: $grey-1;
-  }
-
-  &:focus {
-    outline: none;
-    border-color: $black;
-  }
-}
-
-.footer__discount-button {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: $black;
-  color: $white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background: #333;
-  }
-
-  &:active {
-    background: #555;
-  }
-}
-*/

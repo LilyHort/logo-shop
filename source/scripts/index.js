@@ -755,6 +755,126 @@ function initFormValidation() {
   });
 }
 
+function initOrderForm() {
+  const form = document.querySelector('.form');
+  const submitButton = document.querySelector('.total__button');
+
+  console.log('Инициализация формы заказа:', { form, submitButton }); // Отладочное сообщение
+
+  if (!form || !submitButton) {
+    console.error('Форма или кнопка не найдены!', { form, submitButton });
+    return;
+  }
+
+  // Обработчик клика на кнопку "Оформить заказ"
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault(); // Предотвращаем стандартную отправку
+
+    console.log('Кнопка "Оформить заказ" нажата!'); // Отладочное сообщение
+    collectOrderData(form);
+  });
+
+  // Также добавляем обработчик на форму (на случай, если кнопка будет внутри формы)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('Форма отправлена!');
+    collectOrderData(form);
+  });
+}
+
+function collectOrderData(form) {
+  // Создаем объект FormData
+  const formData = new FormData(form);
+
+  // Собираем данные о товарах в корзине
+  const cartItems = [];
+  const cardItems = document.querySelectorAll('.card__item:not(.card__item-deleted)');
+
+  cardItems.forEach((item, index) => {
+    const title = item.querySelector('.card__title')?.textContent?.trim() || '';
+    const selectedSize = item.querySelector('.card__size-item--active .card__size-label')?.textContent?.trim() || '';
+    const selectedColor = item.querySelector('.card__color-item--active')?.classList.toString().match(/card__color-item--(\w+)/)?.[1] || '';
+    const quantity = item.querySelector('.card__price-quantity-input')?.value || '1';
+    const price = item.querySelector('.card__price-total .card__price-current')?.textContent?.replace(/[^\d]/g, '') || '0';
+
+    cartItems.push({
+      id: index + 1,
+      title: title,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: parseInt(quantity, 10),
+      price: parseInt(price, 10)
+    });
+  });
+
+  // Собираем данные о способе оплаты
+  const selectedPayment = document.querySelector('.payment__input:checked');
+  const paymentMethod = selectedPayment ? selectedPayment.value : '';
+
+  // Собираем данные о промокоде
+  const promoCode = document.querySelector('#promo')?.value?.trim() || '';
+
+  // Собираем данные о дополнительной опции
+  const optionChecked = document.querySelector('#option')?.checked || false;
+
+  // Собираем итоговую сумму
+  const totalAmount = document.querySelector('.total__final-value')?.textContent?.replace(/[^\d]/g, '') || '0';
+
+  // Создаем объект с полными данными заказа
+  const orderData = {
+    // Контактные данные
+    name: formData.get('name') || '',
+    surname: formData.get('surname') || '',
+    phone: formData.get('phone') || '',
+    email: formData.get('email') || '',
+    address: formData.get('address') || '',
+
+    // Способ оплаты
+    paymentMethod: paymentMethod,
+
+    // Комментарий
+    comment: formData.get('comment') || '',
+
+    // Промокод
+    promoCode: promoCode,
+
+    // Дополнительная опция
+    option: optionChecked,
+
+    // Товары в корзине
+    cartItems: cartItems,
+
+    // Итоговая сумма
+    totalAmount: parseInt(totalAmount, 10),
+
+    // Метаданные
+    timestamp: new Date().toISOString(),
+    userAgent: navigator.userAgent
+  };
+
+  // Выводим данные в консоль
+  console.log('=== ДАННЫЕ ЗАКАЗА ===');
+  console.log('FormData объект:', formData);
+  console.log('Структурированные данные заказа:', orderData);
+  console.log('===================');
+
+  // Можно также вывести отдельные части
+  console.log('Контактные данные:', {
+    name: orderData.name,
+    surname: orderData.surname,
+    phone: orderData.phone,
+    email: orderData.email,
+    address: orderData.address
+  });
+
+  console.log('Товары в корзине:', orderData.cartItems);
+  console.log('Способ оплаты:', orderData.paymentMethod);
+  console.log('Итоговая сумма:', orderData.totalAmount);
+
+  // Здесь можно добавить отправку данных на сервер
+  // sendOrderToServer(orderData);
+}
+
 /* Валидация комментария */
 
 function initCommentValidation() {
@@ -814,6 +934,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Инициализируем валидацию форм
   initFormValidation();
 
+  // Инициализируем обработку формы заказа
+  initOrderForm();
+
   // Инициализируем валидацию комментария
   initCommentValidation();
 
@@ -835,50 +958,3 @@ function initToggleSwitches() {
     });
   });
 }
-
-/* Форма подписки на новости */
-/*
-
-function initNewsletterForm() {
-  const form = document.querySelector('.footer__discount-form');
-  const input = document.querySelector('.footer__discount-input');
-  const button = document.querySelector('.footer__discount-button');
-
-  if (!form || !input || !button) {
-    return;
-  }
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const email = input.value.trim();
-
-    // Простая валидация email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!email) {
-      alert('Пожалуйста, введите email адрес');
-      return;
-    }
-
-    if (!emailRegex.test(email)) {
-      alert('Пожалуйста, введите корректный email адрес');
-      return;
-    }
-
-    // Имитация отправки
-    button.textContent = '✓';
-    button.style.backgroundColor = '#28a745';
-    input.value = '';
-    input.placeholder = 'Спасибо за подписку!';
-
-    // Возвращаем исходное состояние через 3 секунды
-    setTimeout(() => {
-      button.textContent = '→';
-      button.style.backgroundColor = '';
-      input.placeholder = 'Введите ваш email';
-    }, 3000);
-  });
-}
-
-*/

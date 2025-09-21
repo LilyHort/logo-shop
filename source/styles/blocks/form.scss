@@ -1,7 +1,4 @@
 .form {
-  /* Мобильная версия - обычный поток */
-
-  /* Десктопная версия - позиционирование в гриде */
   @media (min-width: $desktop-width) {
     grid-column: 1;
     grid-row: 2;
@@ -20,10 +17,10 @@ padding: 0;
 margin: 0;
 margin-bottom: 24px;
 
-@media (min-width: $desktop-width) {
-  font-size: 28px;
-  line-height: 30px;
-  margin-bottom: 29px;
-}
+  @media (min-width: $desktop-width) {
+    font-size: 28px;
+    line-height: 30px;
+    margin-bottom: 29px;
+  }
 }
 

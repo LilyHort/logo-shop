@@ -16,7 +16,6 @@
 
 .header__wrapper {
   display: flex;
-
   flex-direction: row;
   align-items: center;
   padding: 7px 16px 5px;
@@ -38,7 +37,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
 }
 
 .header__nav {
@@ -53,8 +51,6 @@
     padding: 8px 31px;
   }
 }
-
-
 
 .header__nav-main-button {
   background-color: transparent;
@@ -119,7 +115,6 @@
 
 .header__nav-main-list {
   display: none;
-
 
   &--open {
     display: block;
@@ -205,24 +200,24 @@
 .header__nav-user-item-count {
   display: none;
 
-  @media (min-width: $desktop-width) {
-  position: absolute;
-  top: -2px;
-  right: 10px;
-  border-radius: 100px;
-  width: 15px;
-  height: 15px;
-  background-color: $black;
-  color: $white;
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 8px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    @media (min-width: $desktop-width) {
+    position: absolute;
+    top: -2px;
+    right: 10px;
+    border-radius: 100px;
+    width: 15px;
+    height: 15px;
+    background-color: $black;
+    color: $white;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .header__nav-user-list {
@@ -248,10 +243,12 @@
   @media (min-width: $desktop-width) {
     &:hover .header__nav-user-icon {
       opacity: 0.3;
+      transition: opacity 0.3s ease;
     }
 
     &:active .header__nav-user-icon {
       opacity: 0.5;
+            transition: opacity 0.3s ease;
     }
   }
 }
