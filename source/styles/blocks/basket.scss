@@ -1,0 +1,29 @@
+.basket {
+  @media (min-width: $desktop-width) {
+    grid-column: 1;
+  }
+}
+
+.basket__wrapper {
+  margin-bottom: 22px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 28px;
+  }
+}
+
+.basket__info {
+  margin: 0;
+
+  @media (min-width: $desktop-width) {
+    font-size: 28px;
+    line-height: 30px;
+  }
+}
+
+.basket__summary {
+  font-size: 24px;
+  line-height: 30px;
+  color: $black;
+  width: 55vw;
+}

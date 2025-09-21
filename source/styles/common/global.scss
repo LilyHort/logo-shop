@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  max-width: 1300px;
+  margin: 0 auto;
+  font-family: $helvetica-family;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+

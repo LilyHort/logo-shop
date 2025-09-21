@@ -1,0 +1,28 @@
+/* GLOBAL */
+@import "./common/variables.scss";
+@import "./common/global.scss";
+@import "./common/fonts.scss";
+@import "./common/visually-hidden.scss";
+@import "./common/accent-color.scss";
+
+/* BLOCKS */
+@import "./blocks/list.scss";
+@import "./blocks/link.scss";
+@import "./blocks/fieldset.scss";
+@import "./blocks/button.scss";
+@import "./blocks/title.scss";
+@import "./blocks/ruble.scss";
+@import "./blocks/header.scss";
+@import "./blocks/main.scss";
+@import "./blocks/bread-crumbs.scss";
+@import "./blocks/order.scss";
+@import "./blocks/basket.scss";
+@import "./blocks/card.scss";
+@import "./blocks/form.scss";
+@import "./blocks/contacts-personal.scss";
+@import "./blocks/address.scss";
+@import "./blocks/payment.scss";
+@import "./blocks/comment.scss";
+@import "./blocks/total.scss";
+@import "./blocks/footer.scss";
+@import "./blocks/legal-information.scss";

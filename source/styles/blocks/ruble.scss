@@ -1,0 +1,15 @@
+.ruble {
+    font-family: system-ui;
+
+    &--basket {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    @media (min-width: $desktop-width) {
+        &--basket {
+          font-size: 28px;
+          line-height: 30px;
+        }
+    }
+}

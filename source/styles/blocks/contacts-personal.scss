@@ -1,0 +1,132 @@
+.contacts-personal__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+
+  @media (min-width: $desktop-width) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 16px;
+    margin-bottom: 48px;
+  }
+
+}
+
+.contacts-personal__item {
+  position: relative;
+
+  @media (min-width: $desktop-width) {
+    &--address {
+      grid-column: 1 / 3;
+      position: relative;
+    }
+  }
+}
+
+.contacts-personal__label {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: $grey-1;
+  display: none;
+  position: absolute;
+  background-color: $white;
+  left: 16px;
+  top: -10px;
+  z-index: 1;
+  padding: 0 4px;
+  white-space: pre-line;
+
+  &--visible {
+    display: block;
+  }
+}
+
+.contacts-personal__input {
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  padding: 11px 16px;
+  box-sizing: border-box;
+  border: 1px solid $grey-2;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+
+  &:focus {
+    border-color: $grey-1;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+
+
+  // Стили для валидации с кастомными сообщениями
+  &.error {
+    border-color: #ff4444;
+
+    &::placeholder {
+      color: #ff4444;
+      transition: color 0.3s ease;
+    }
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 13px 16px;
+
+    &:hover {
+      border-color: $grey-2;
+      color: $grey-2;
+
+      &::placeholder {
+        color: $grey-2;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+}
+
+// Стили для сообщений об ошибках
+.contacts-personal__error {
+  display: none;
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+
+  &.show {
+    display: block;
+    transition: display 0.3s ease;
+  }
+}
+
+.contacts-personal__map {
+  border: none;
+  width: 100%;
+  height: 220px;
+  margin: 16px 0 40px;
+  margin-bottom: 40px;
+  margin-bottom: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: none;
+
+  &--visible {
+    display: block;
+    transition: display 0.3s ease;
+  }
+
+  @media (min-width: $desktop-width) {
+    display: block; // Показываем карту только на десктопе
+    position: absolute;
+    top: 67%;
+    right: calc(-1 * var(--total-width, 100%) - 16px);
+    transform: translateY(-50%);
+    width: var(--total-width, 100%);
+    height: 400px;
+    margin-top: 0;
+    z-index: 1000;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+}

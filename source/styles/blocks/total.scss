@@ -1,0 +1,316 @@
+.total {
+  border: 1px solid $grey-1;
+  width: 100%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  @media (min-width: $desktop-width) {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    margin-bottom: 20px;
+    z-index: 10;
+    width: 100%;
+   // max-width: 100%;
+
+    // CSS переменная для ширины total (для наследования картой)
+    --total-width: 100%;
+  }
+}
+
+.total__wrapper {
+  padding: 22px 15px;
+}
+
+.total__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid $grey-2;
+  margin: 0;
+  margin-bottom: 12px;
+
+  @media (min-width: $desktop-width) {
+    gap: 21px;
+    padding-bottom: 15px;
+    margin-bottom: 23px;
+  }
+}
+
+.total__item {
+  display: flex;
+  justify-content: space-between;
+
+  &--discount {
+    flex-wrap: wrap;
+
+  }
+}
+
+.total__item--discount .total__sub-list {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.total__sub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.total__sub-item {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: $black;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+
+.total__label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+  line-height: 24px;
+  }
+}
+
+.total__price {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: right;
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+  line-height: 24px;
+  }
+}
+
+.total__option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 11px;
+  border-bottom: 1px solid $grey-2;
+  position: relative;
+
+  @media (min-width: $desktop-width) {
+    padding-bottom: 17px;
+  }
+}
+
+.total__option-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.total__option-info-general {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  margin-bottom: 10px;
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 5px;
+  }
+}
+
+.total__option-info-additional {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: $grey-1;
+}
+
+.total__option-toggle {
+  position: absolute;
+  right: 0;
+  top: 8px;
+
+  @media (min-width: $desktop-width) {
+    top: 5px;
+    right: 2px;
+  }
+}
+
+
+.total__option-toggle-icon {
+  display: inline-block;
+  width: 34px;
+  height: 14px;
+  border-radius: 12px;
+  background: $grey-2;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition-duration: 300ms;
+
+  &::after {
+    content: "";
+    height: 22px;
+    width: 22px;
+    border-radius: 18px;
+    background: $grey-1;
+    top: -4px;
+    left: -7px;
+    transition-duration: 300ms;
+    box-shadow: 0 0 10px 0 #999999;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &--checked {
+    &::after {
+      left: 12px;
+      background: $black;
+    }
+  }
+}
+
+.total__final {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: $black;
+  padding: 12px 0;
+
+  @media (min-width: $desktop-width) {
+    font-size: 28px;
+    line-height: 30px;
+    padding: 24px 0 15px;
+  }
+}
+
+.total__input {
+  border: 1px solid $grey-2;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  padding: 11px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+
+
+  // Стили для валидации с кастомными сообщениями
+  &.error {
+    border-color: #ff4444;
+
+    &::placeholder {
+      color: #ff4444;
+    }
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 15px 19px;
+    margin-bottom: 19px;
+
+    &:hover {
+      border-color: $grey-2;
+      transition: border-color 0.3s ease, color 0.3s ease;
+      color: $grey-2;
+
+      &::placeholder {
+        color:  $grey-2;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+}
+
+// Стили для сообщений об ошибках в total
+.total__error {
+  display: none;
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+
+  &.show {
+    display: block;
+  }
+}
+
+// Стили для сообщений об успешном применении купона
+.total__success {
+  display: none;
+  color: #28a745;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+
+  &.show {
+    display: block;
+    transition: display 0.3s ease;
+  }
+
+  .valid-ok {
+    font-weight: 700;
+    color: #28a745;
+    transition: color 0.3s ease;
+  }
+}
+
+.total__button {
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  line-height: 131%;
+  color: $white;
+  background-color: $black;
+  padding: 15px;
+
+  @media (min-width: $desktop-width) {
+    &:hover {
+      background-color: $grey-2;
+      color: $grey-1;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    &:active {
+      background-color: $grey-1;
+      color: $white;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  }
+}
+
+.total__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: $grey-1;
+  margin: 0;
+  margin-top: 10px;
+  }
+
+  .total__text-link {
+    text-decoration: underline;
+  }

@@ -1,0 +1,447 @@
+.card {
+  @media (min-width: $desktop-width) {
+    grid-column: 1;
+  }
+}
+
+.card__list {
+  margin-bottom: 41px;
+}
+
+.card__item {
+  position: relative;
+  border-top: 0.50px solid $grey-2;
+  padding: 17px 0 16px;
+
+  @media (min-width: $desktop-width) {
+    display: grid;
+    grid-template-columns: 130px 1fr 1.5fr;
+    gap: 20px;
+    padding: 25px 0 7px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.card__item:last-child {
+  border-bottom: 0.50px solid $grey-2;
+}
+
+.card__content {
+  @media (min-width: $desktop-width) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.card__image {
+  @media (min-width: $desktop-width) {
+    width: 130px;
+    height: 160px;
+  }
+}
+
+.card__button {
+  position: absolute;
+  top: 18px;
+  right: 1px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &--restore {
+    top: 30px;
+    right: 9px;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: $black;
+    transform-origin: center;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  @media (min-width: $desktop-width) {
+    top: 25px;
+    right: 1px;
+
+    &--restore {
+      top: 41px;
+      right: 26px;
+    }
+  }
+}
+
+.card__link {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.card__title {
+font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+margin: 0;
+padding-right: 25px;
+
+&--desktop {
+  display: none;
+}
+
+@media (min-width: $desktop-width) {
+  padding: 0;
+
+  &--mobile {
+    display: none;
+  }
+
+  &--desktop {
+    display: block;
+    margin-bottom: 13px;
+  }
+
+  font-size: 20px;
+  line-height: 24px;
+}
+}
+
+.card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+font-size: 12px;
+line-height: 15px;
+color: $grey-1;
+margin-bottom: 14px;
+
+@media (min-width: $desktop-width) {
+  gap: 10px;
+  margin-bottom: 10px;
+}
+}
+
+.card__details-text {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+}
+
+.card__details-meaning {
+color: $black;
+}
+
+/* Размер */
+
+.card__size {
+  border: none;
+  margin-bottom: 18px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 12px;
+  }
+}
+
+.card__size-list {
+  display: flex;
+  gap: 8px;
+
+  @media (min-width: $desktop-width) {
+    gap: 5px;
+  }
+}
+
+.card__size-item {
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  background-color: $grey-3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: $black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &--active {
+    background-color: $black;
+    color: $white;
+  }
+
+  &--none {
+    color: $grey-2;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: $grey-2;
+  }
+}
+
+.card__size-label {
+  font-size: 12px;
+  line-height: 15px;
+  color: inherit;
+}
+
+/* Цвет */
+
+.card__color {
+  border: none;
+  margin-bottom: 19px;
+}
+
+.card__color-list {
+  display: flex;
+  gap: 20px;
+
+  @media (min-width: $desktop-width) {
+    gap: 10px;
+  }
+}
+
+.card__color-item {
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  background-color: $grey-3;
+  color: $grey-3;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &--black {
+    background-color: $black-product;
+    color: $black-product;
+  }
+
+  &--blue {
+    background-color: $blue-product;
+    color: $blue-product;
+  }
+
+  &--brown {
+    background-color: $brown-product;
+    color: $brown-product;
+  }
+
+  &--active {
+    box-shadow: 0 0 0 2px $white, 0 0 0 3px currentColor;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 2px $white, 0 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Цена */
+.card__price {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (min-width: $desktop-width) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px;
+    align-items: flex-start;
+  }
+}
+
+.card__price-old {
+font-size: 12px;
+line-height: 15px;
+text-decoration: line-through;
+color: $grey-1;
+}
+
+.card__price-current {
+font-weight: 700;
+font-size: 16px;
+line-height: 21px;
+color: $black;
+
+@media (min-width: $desktop-width) {
+  font-size: 20px;
+  line-height: 24px;
+}
+}
+
+.card__price-quantity {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 8px;
+  height: 42px;
+  min-width: 146px;
+  max-width: 153px;
+  background-color: $grey-3;
+  border-radius: 5px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.card__price-quantity-input {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+
+  // Убираем кастомные стрелки для input[type="number"]
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.card__price-quantity-input,
+.card__price-quantity-button {
+  border: none;
+  background-color: transparent;
+  text-align: center;
+}
+
+.card__price-quantity-button--minus {
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background-color: $black;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+  }
+
+  @media (min-width: $desktop-width) {
+    &:hover {
+      &::before {
+        background-color: $grey-2;
+      }
+    }
+
+    &:active {
+      &::before {
+        background-color: $grey-1;
+      }
+    }
+  }
+}
+
+.card__price-quantity-button--plus {
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: $black;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    width: 14px;
+    height: 2px;
+  }
+
+  &::after {
+    width: 2px;
+    height: 14px;
+  }
+
+  @media (min-width: $desktop-width) {
+    &:hover {
+      &::before,
+      &::after {
+        background-color: $grey-2;
+      }
+    }
+
+    &:active {
+      &::before,
+      &::after {
+        background-color: $grey-1;
+      }
+    }
+  }
+}
+
+/* Удаленный товар */
+
+.card__item-deleted {
+  padding: 25px 0 23px;
+}
+
+.card__item-deleted-wrapper {
+  background-color: $grey-3;
+  padding: 15px 24px 9px 8px;
+
+  @media (min-width: $desktop-width) {
+    grid-column: 1/-1;
+    display: flex;
+    gap: 26px;
+    padding: 18px 25px 10px;
+    align-items: baseline;
+  }
+}
+
+.card__item-deleted-text {
+  font-size: 14px;
+  line-height: 18px;
+  color: $grey-1;
+  margin: 0;
+  margin-bottom: 4px;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+
+.card__item-deleted-name {
+  font-weight: 700;
+}
+
+.card__item-deleted-button {
+font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: $black;
+}
+

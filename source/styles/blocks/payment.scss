@@ -1,0 +1,66 @@
+.payment__title {
+  margin-bottom: 23px;
+}
+
+.payment__list {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  margin: 0;
+  margin-bottom: 41px;
+}
+
+.payment__item {
+  display: flex;
+  gap: 10px;
+}
+
+.payment__label-icon {
+  width: 22px;
+  height: 22px;
+  border: 1px solid $grey-1;
+  border-radius: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+  flex-shrink: 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: $black;
+    border-radius: 100%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.payment__item:hover {
+  .payment__label-icon,
+  .payment__label-text {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.payment__input:checked ~ .payment__label-icon::after {
+  opacity: 1;
+}
+
+.payment__label-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  padding-left: 6px;
+}

@@ -1,0 +1,178 @@
+.footer {
+  font-family: $helvetica-family;
+}
+
+.footer__wrapper {
+  padding: 24px 16px 0;
+
+  @media (min-width: $desktop-width) {
+    position: relative;
+  }
+}
+
+.footer__more-links {
+  @media (min-width: $desktop-width) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.footer__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (min-width: $desktop-width) {
+   display: grid;
+   grid-template-columns: 1fr 2fr;
+   gap: 150px;
+   padding: 0 20px;
+   max-width: 1300px;
+
+
+    &::before {
+      content: "";
+      border-top: 0.5px solid $grey-2;
+      position: absolute;
+      left: calc(-50vw + 50%);
+      width: 100vw;
+      height: 0.5px;
+      background: $grey-2;
+    }
+  }
+}
+
+//Подписка
+.footer__discount {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__discount-title {
+font-weight: 400;
+font-size: 28px;
+line-height: 30px;
+color: $black;
+}
+
+.footer__discount-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.footer__discount-input {
+  width: 100%;
+  padding: 16px 60px 16px 20px;
+  border: 1px solid $grey-2;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 21px;
+  box-sizing: border-box;
+  background: $white;
+  color: $black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &::placeholder {
+    color: $grey-1;
+    transition: color 0.3s ease;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $black;
+  }
+}
+
+.footer__discount-input {
+  @media (min-width: $desktop-width) {
+    cursor: pointer;
+
+    &:hover {
+      border-color: $grey-2;
+      color: $grey-2;
+
+      &::placeholder {
+        color: $grey-2;
+      }
+    }
+  }
+
+  // Стили для валидации с кастомными сообщениями
+  &.error {
+    border-color: #ff4444;
+  }
+}
+
+// Стили для сообщений об ошибках в footer
+.footer__error {
+  display: none;
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+
+  &.show {
+    display: block;
+  }
+}
+
+.footer__discount-button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  color: $black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    color: $grey-2;
+  }
+
+  &:active {
+    color: $grey-1;
+  }
+}
+
+.footer__discount-button-icon {
+  padding-right: 10px;
+
+  &:hover {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.footer__discount-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: $grey-1;
+  text-align: center;
+}
+
+.footer__discount-text-link {
+  text-decoration: underline;
+}
+
+.footer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
