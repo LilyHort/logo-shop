@@ -210,23 +210,87 @@
   line-height: 21px;
   padding: 11px 16px;
   margin-bottom: 12px;
+  cursor: pointer;
+
+
+  // Стили для валидации с кастомными сообщениями
+  &.error {
+    border-color: #ff4444;
+
+    &::placeholder {
+      color: #ff4444;
+    }
+  }
 
   @media (min-width: $desktop-width) {
     padding: 15px 19px;
     margin-bottom: 19px;
+
+    &:hover {
+      border-color: $grey-2;
+
+      &::placeholder {
+        color:  $grey-2;
+      }
+    }
+  }
+}
+
+// Стили для сообщений об ошибках в total
+.total__error {
+  display: none;
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+
+  &.show {
+    display: block;
+  }
+}
+
+// Стили для сообщений об успешном применении купона
+.total__success {
+  display: none;
+  color: #28a745;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+
+  &.show {
+    display: block;
+  }
+
+  .valid-ok {
+    font-weight: 700;
+    color: #28a745;
   }
 }
 
 .total__button {
   width: 100%;
   font-family: var(--font-family);
-font-weight: 700;
-font-size: 16px;
-line-height: 21px;
-line-height: 131%;
-color: $white;
-background-color: $black;
-padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  line-height: 131%;
+  color: $white;
+  background-color: $black;
+  padding: 15px;
+
+  @media (min-width: $desktop-width) {
+    &:hover {
+      background-color: $grey-2;
+      color: $grey-1;
+    }
+
+    &:active {
+      background-color: $grey-1;
+      color: $white;
+    }
+  }
 }
 
 .total__text {

@@ -171,6 +171,14 @@
 
   @media (min-width: $desktop-width) {
     padding: 10px 20px;
+
+    &:hover {
+      color: $grey-1;
+    }
+
+    &:active {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -198,8 +206,8 @@
 
   @media (min-width: $desktop-width) {
   position: absolute;
-  top: 0;
-  right: 14px;
+  top: -2px;
+  right: 10px;
   border-radius: 100px;
   width: 15px;
   height: 15px;
@@ -231,6 +239,19 @@
   @media (min-width: $desktop-width) {
     width: 20px;
     height: 20px;
+  }
+}
+
+// Ховер для иконок через родительскую ссылку
+.header__link {
+  @media (min-width: $desktop-width) {
+    &:hover .header__nav-user-icon {
+      opacity: 0.3;
+    }
+
+    &:active .header__nav-user-icon {
+      opacity: 0.5;
+    }
   }
 }
 

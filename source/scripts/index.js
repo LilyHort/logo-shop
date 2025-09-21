@@ -13,6 +13,155 @@ function syncMapWidthWithTotal() {
 window.addEventListener('load', syncMapWidthWithTotal);
 window.addEventListener('resize', syncMapWidthWithTotal);
 
+/* Валидация форм только при отправке */
+function validateInput(input) {
+  const value = input.value.trim();
+  const type = input.type;
+  const required = input.hasAttribute('required');
+
+  // Убираем предыдущие ошибки
+  input.classList.remove('error');
+  const existingError = input.parentNode.querySelector('.contacts-personal__error, .total__error, .footer__error');
+  if (existingError) {
+    existingError.remove();
+  }
+
+  let isValid = true;
+  let errorMessage = '';
+
+  // Проверка обязательных полей
+  if (required && !value) {
+    isValid = false;
+    errorMessage = 'Это поле обязательно для заполнения';
+  }
+
+  // Проверка email
+  if (type === 'email' && value) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      isValid = false;
+      errorMessage = 'Введите корректный email адрес';
+    }
+  }
+
+  // Проверка телефона
+  if (input.name === 'phone' && value) {
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    if (!phoneRegex.test(value)) {
+      isValid = false;
+      errorMessage = 'Введите корректный номер телефона';
+    }
+  }
+
+  // Показываем ошибку если есть
+  if (!isValid) {
+    input.classList.add('error');
+    showErrorMessage(input, errorMessage);
+  }
+
+  return isValid;
+}
+
+function showErrorMessage(input, message) {
+  const errorDiv = document.createElement('div');
+
+  // Определяем класс ошибки в зависимости от родительского элемента
+  if (input.closest('.contacts-personal')) {
+    errorDiv.className = 'contacts-personal__error show';
+  } else if (input.closest('.total')) {
+    errorDiv.className = 'total__error show';
+  } else if (input.closest('.footer')) {
+    errorDiv.className = 'footer__error show';
+  }
+
+  errorDiv.textContent = message;
+  input.parentNode.appendChild(errorDiv);
+}
+
+function showSuccessMessage(input, message) {
+  const successDiv = document.createElement('div');
+  successDiv.className = 'total__success show';
+  successDiv.innerHTML = message;
+  input.parentNode.appendChild(successDiv);
+}
+
+// Валидация купона
+function validatePromoCode(promoInput) {
+  const promoValue = promoInput.value.trim().toUpperCase();
+
+  // Убираем предыдущие сообщения
+  const existingError = promoInput.parentNode.querySelector('.total__error');
+  const existingSuccess = promoInput.parentNode.querySelector('.total__success');
+  if (existingError) existingError.remove();
+  if (existingSuccess) existingSuccess.remove();
+
+  // Список валидных купонов
+  const validPromoCodes = ['1B6D9FC', 'DISCOUNT10', 'SAVE20', 'WELCOME'];
+
+  if (promoValue && validPromoCodes.includes(promoValue)) {
+    // Купон валиден
+    promoInput.classList.remove('error');
+    showSuccessMessage(promoInput, `<span class="valid-ok">${promoValue}</span> - купон применен`);
+    return true;
+  } else if (promoValue) {
+    // Купон невалиден
+    promoInput.classList.add('error');
+    showErrorMessage(promoInput, 'Неверный промокод');
+    return false;
+  }
+
+  // Поле пустое - убираем все сообщения
+  promoInput.classList.remove('error');
+  return true;
+}
+
+// Валидация только при отправке формы
+document.addEventListener('DOMContentLoaded', function() {
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', function(e) {
+      let isFormValid = true;
+      const formInputs = this.querySelectorAll('input[required]');
+
+      // Очищаем предыдущие ошибки
+      formInputs.forEach(input => {
+        input.classList.remove('error');
+        const existingError = input.parentNode.querySelector('.contacts-personal__error, .total__error, .footer__error');
+        if (existingError) {
+          existingError.remove();
+        }
+      });
+
+      // Валидируем все поля
+      formInputs.forEach(input => {
+        if (!validateInput(input)) {
+          isFormValid = false;
+        }
+      });
+
+      if (!isFormValid) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  // Валидация промокода при вводе
+  const promoInput = document.querySelector('#promo');
+  if (promoInput) {
+    promoInput.addEventListener('input', function() {
+      // Небольшая задержка для валидации
+      clearTimeout(this.validationTimeout);
+      this.validationTimeout = setTimeout(() => {
+        validatePromoCode(this);
+      }, 500);
+    });
+
+    promoInput.addEventListener('blur', function() {
+      validatePromoCode(this);
+    });
+  }
+});
+
 /* Открытие и закрытие меню */
 const menuButton = document.querySelector('.header__nav-main-button');
 const navMainList = document.querySelector('.header__nav-main-list');

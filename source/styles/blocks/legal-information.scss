@@ -54,4 +54,24 @@
   }
 }
 
+.legal-information-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legal-information-link-studio-icon {
+  display: flex;
+  align-items: center;
+}
+
+.legal-information-link-studio-icon-svg {
+  width: 21px;
+  height: 21px;
+}
+
+.legal-information-link-studio-text {
+  display: flex;
+  align-items: center;
+}
 

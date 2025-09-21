@@ -34,7 +34,7 @@
 .footer__more-links {
   @media (min-width: $desktop-width) {
     display: flex;
-    gap: 100px;
+    justify-content: space-between;
   }
 }
 
@@ -108,6 +108,41 @@ color: $black;
   }
 }
 
+.footer__discount-input {
+  @media (min-width: $desktop-width) {
+    cursor: pointer;
+
+    &:hover {
+      border-color: $grey-2;
+      color: $grey-2;
+
+      &::placeholder {
+        color: $grey-2;
+      }
+    }
+  }
+
+
+  // Стили для валидации с кастомными сообщениями
+  &.error {
+    border-color: #ff4444;
+
+  }
+}
+
+// Стили для сообщений об ошибках в footer
+.footer__error {
+  display: none;
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+
+  &.show {
+    display: block;
+  }
+}
+
 .footer__discount-button {
   font-weight: 700;
   font-size: 16px;
@@ -129,11 +164,19 @@ color: $black;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background: #333;
+    color: $grey-2;
   }
 
   &:active {
-    background: #555;
+    color: $grey-1;
+  }
+}
+
+.footer__discount-button-icon {
+  padding-right: 10px;
+
+  &:hover {
+    opacity: 0.3;
   }
 }
 

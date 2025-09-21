@@ -187,6 +187,10 @@ color: $black;
   &--none {
     color: $grey-2;
   }
+
+  &:hover {
+    background-color: $grey-2;
+  }
 }
 
 .card__size-label {
@@ -236,6 +240,10 @@ color: $black;
 
   &--active {
     box-shadow: 0 0 0 2px $white, 0 0 0 3px currentColor;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 2px $white, 0 0 0 3px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -300,6 +308,15 @@ color: $black;
   font-size: 16px;
   line-height: 21px;
   color: $black;
+
+  // Убираем кастомные стрелки для input[type="number"]
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .card__price-quantity-input,
@@ -322,6 +339,20 @@ color: $black;
     background-color: $black;
     border-radius: 2px;
     transform: translate(-50%, -50%);
+  }
+
+  @media (min-width: $desktop-width) {
+    &:hover {
+      &::before {
+        background-color: $grey-2;
+      }
+    }
+
+    &:active {
+      &::before {
+        background-color: $grey-1;
+      }
+    }
   }
 }
 
@@ -347,6 +378,22 @@ color: $black;
   &::after {
     width: 2px;
     height: 14px;
+  }
+
+  @media (min-width: $desktop-width) {
+    &:hover {
+      &::before,
+      &::after {
+        background-color: $grey-2;
+      }
+    }
+
+    &:active {
+      &::before,
+      &::after {
+        background-color: $grey-1;
+      }
+    }
   }
 }
 

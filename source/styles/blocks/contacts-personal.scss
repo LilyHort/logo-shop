@@ -53,13 +53,46 @@
   box-sizing: border-box;
   border: 1px solid $grey-2;
   outline: none;
+  cursor: pointer;
 
   &:focus {
     border-color: $grey-1;
   }
 
+
+  // Стили для валидации с кастомными сообщениями
+  &.error {
+    border-color: #ff4444;
+
+    &::placeholder {
+      color: #ff4444;
+    }
+  }
+
   @media (min-width: $desktop-width) {
     padding: 13px 16px;
+
+    &:hover {
+      border-color: $grey-2;
+      color: $grey-2;
+
+      &::placeholder {
+        color: $grey-2;
+      }
+    }
+  }
+}
+
+// Стили для сообщений об ошибках
+.contacts-personal__error {
+  display: none;
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 4px;
+
+  &.show {
+    display: block;
   }
 }
 
@@ -91,5 +124,3 @@
     z-index: 1000;
   }
 }
-
-

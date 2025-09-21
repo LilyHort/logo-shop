@@ -37,6 +37,15 @@
     height: 141px;
     padding: 13px 19px;
     margin-bottom: -2px;
+
+    &:hover {
+      border-color: $grey-2;
+      color: $grey-2;
+
+      &::placeholder {
+        color: $grey-2;
+      }
+    }
   }
 }
 
