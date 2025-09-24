@@ -29,6 +29,11 @@ function toggleCardSizeItem() {
   }
 }
 
-cardSizeItems.forEach((item) => {
-  item.addEventListener('click', toggleCardSizeItem);
-});
+function initSizeSelection() {
+  cardSizeItems.forEach((item) => {
+    item.addEventListener('click', toggleCardSizeItem);
+  });
+}
+
+// Экспортируем функцию
+export { initSizeSelection };

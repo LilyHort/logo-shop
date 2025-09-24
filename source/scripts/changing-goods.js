@@ -1,9 +1,5 @@
 /* Изменение количества товара */
 
-const quantityInputs = document.querySelectorAll('.card__price-quantity-input');
-const minusButtons = document.querySelectorAll('.card__price-quantity-button--minus');
-const plusButtons = document.querySelectorAll('.card__price-quantity-button--plus');
-
 function updatePrice(cardItem) {
   const quantityInput = cardItem.querySelector('.card__price-quantity-input');
   const priceUnit = cardItem.querySelector('.card__price-unit .card__price-current');
@@ -165,50 +161,14 @@ function changeQuantity(cardItem, change) {
   updatePrice(cardItem);
 }
 
-// Обработчики для кнопок минус
-minusButtons.forEach((button) => {
-  button.addEventListener('click', function() {
-    const cardItem = this.closest('.card__item');
-    changeQuantity(cardItem, -1);
-  });
-});
 
-// Обработчики для кнопок плюс
-plusButtons.forEach((button)=> {
-  button.addEventListener('click', function() {
-    const cardItem = this.closest('.card__item');
-    changeQuantity(cardItem, 1);
-  });
-});
+function initGoodsChanging() {
+  // Получаем элементы
+  const quantityInputs = document.querySelectorAll('.card__price-quantity-input');
+  const minusButtons = document.querySelectorAll('.card__price-quantity-button--minus');
+  const plusButtons = document.querySelectorAll('.card__price-quantity-button--plus');
 
-// Обработчики для прямого ввода в поле количества
-quantityInputs.forEach((input) => {
-  input.addEventListener('input', function() {
-    const value = parseInt(this.value, 10);
-
-    // Проверяем корректность значения
-    if (isNaN(value) || value < 1) {
-      this.value = 1;
-    } else if (value > 100) {
-      this.value = 100;
-    }
-
-    const cardItem = this.closest('.card__item');
-    updatePrice(cardItem);
-  });
-
-  input.addEventListener('blur', function() {
-    // При потере фокуса проверяем еще раз
-    if (this.value === '' || parseInt(this.value, 10) < 1) {
-      this.value = 1;
-      const cardItem = this.closest('.card__item');
-      updatePrice(cardItem);
-    }
-  });
-});
-
-// Инициализируем цены при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
+  // Инициализируем цены при загрузке страницы
   const cardItems = document.querySelectorAll('.card__item:not(.card__item-deleted)');
   cardItems.forEach((item) => {
     const priceUnit = item.querySelector('.card__price-unit .card__price-current');
@@ -239,4 +199,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Обновляем счетчик избранного
   updateFavoriteCount();
-});
+
+  // Обработчики для кнопок минус
+  minusButtons.forEach((button) => {
+    button.addEventListener('click', function() {
+      const cardItem = this.closest('.card__item');
+      changeQuantity(cardItem, -1);
+    });
+  });
+
+  // Обработчики для кнопок плюс
+  plusButtons.forEach((button)=> {
+    button.addEventListener('click', function() {
+      const cardItem = this.closest('.card__item');
+      changeQuantity(cardItem, 1);
+    });
+  });
+
+  // Обработчики для прямого ввода в поле количества
+  quantityInputs.forEach((input) => {
+    input.addEventListener('input', function() {
+      const value = parseInt(this.value, 10);
+
+      if (isNaN(value) || value < 1) {
+        this.value = 1;
+      } else {
+        this.value = value;
+      }
+
+      const cardItem = this.closest('.card__item');
+      updatePrice(cardItem);
+    });
+  });
+
+  quantityInputs.forEach((input) => {
+    input.addEventListener('blur', function() {
+      // При потере фокуса проверяем еще раз
+      if (this.value === '' || parseInt(this.value, 10) < 1) {
+        this.value = 1;
+        const cardItem = this.closest('.card__item');
+        updatePrice(cardItem);
+      }
+    });
+  });
+}
+
+// Экспортируем функцию
+export { initGoodsChanging };

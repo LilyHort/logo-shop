@@ -25,3 +25,6 @@ function initToggleSwitches() {
     });
   });
 }
+
+// Экспортируем функцию
+export { initToggleSwitches };

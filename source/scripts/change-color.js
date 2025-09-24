@@ -24,6 +24,11 @@ function toggleCardColorItem() {
   }
 }
 
-cardColorItem.forEach((item) => {
-  item.addEventListener('click', toggleCardColorItem);
-});
+function initColorSelection() {
+  cardColorItem.forEach((item) => {
+    item.addEventListener('click', toggleCardColorItem);
+  });
+}
+
+// Экспортируем функцию
+export { initColorSelection };

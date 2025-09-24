@@ -183,7 +183,15 @@ function createSuggestionsList() {
 function initDaDataSuggestions() {
   const addressInput = document.querySelector('#address');
 
-  if (!addressInput || !DADATA_TOKEN || DADATA_TOKEN === 'YOUR_DADATA_TOKEN') {
+  console.log('Инициализация DaData:', { addressInput, DADATA_TOKEN });
+
+  if (!addressInput) {
+    console.warn('Поле адреса не найдено');
+    return;
+  }
+
+  if (!DADATA_TOKEN || DADATA_TOKEN === 'YOUR_DADATA_TOKEN') {
+    console.warn('Токен DaData не настроен');
     return;
   }
 
@@ -198,6 +206,8 @@ function initDaDataSuggestions() {
 
   // Функция для запроса к DaData API
   function fetchSuggestions(query) {
+    console.log('Запрос к DaData API:', query);
+
     return fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
       method: 'POST',
       headers: {
@@ -210,8 +220,18 @@ function initDaDataSuggestions() {
         count: 5
       })
     })
-      .then((response) => response.json())
-      .catch(() => ({ suggestions: [] }));
+      .then((response) => {
+        console.log('Ответ от DaData API:', response.status);
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Данные от DaData:', data);
+        return data;
+      })
+      .catch((error) => {
+        console.error('Ошибка запроса к DaData:', error);
+        return { suggestions: [] };
+      });
   }
 
   // Показываем подсказки
@@ -288,8 +308,8 @@ function initDaDataSuggestions() {
   });
 }
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
+// Функция инициализации карты
+function initMap() {
   // Ждем загрузки Яндекс.Карт
   const checkYandexMaps = () => {
     if (typeof window.ymaps !== 'undefined') {
@@ -299,3 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(checkYandexMaps, 500);
     }
   };
+
+  checkYandexMaps();
+}
+
+// Экспортируем функции
+export { initMap, initDaDataSuggestions };

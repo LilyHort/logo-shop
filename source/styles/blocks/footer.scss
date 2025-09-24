@@ -22,6 +22,17 @@
   flex-direction: column;
   gap: 20px;
 
+
+  &::before {
+    content: "";
+    border-top: 0.5px solid $grey-2;
+    position: absolute;
+    left: calc(-50vw + 50%);
+    width: 100vw;
+    height: 0.5px;
+    background: $grey-2;
+  }
+
   @media (min-width: $desktop-width) {
    display: grid;
    grid-template-columns: 1fr 2fr;
@@ -31,15 +42,6 @@
    margin-bottom: 100px;
 
 
-    &::before {
-      content: "";
-      border-top: 0.5px solid $grey-2;
-      position: absolute;
-      left: calc(-50vw + 50%);
-      width: 100vw;
-      height: 0.5px;
-      background: $grey-2;
-    }
   }
 }
 

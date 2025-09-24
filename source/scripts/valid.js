@@ -1,5 +1,8 @@
 /* Валидация форм */
 
+// Импортируем функцию сбора данных
+import { collectOrderData } from './form-data.js';
+
 function validateInput(input) {
   const value = input.value.trim();
   const type = input.type;
@@ -92,60 +95,6 @@ function initFormValidation() {
   });
 }
 
-function initOrderForm() {
-  const form = document.querySelector('.form');
-  const submitButton = document.querySelector('.total__button');
-
-  console.log('Инициализация формы заказа:', { form, submitButton }); // Отладочное сообщение
-
-  if (!form || !submitButton) {
-    console.error('Форма или кнопка не найдены!', { form, submitButton });
-    return;
-  }
-
-  // Добавляем обработчики для очистки ошибок при вводе
-  const inputs = form.querySelectorAll('.contacts-personal__input');
-  inputs.forEach(input => {
-    input.addEventListener('input', function() {
-      this.classList.remove('error');
-    });
-  });
-
-  // Обработчик клика на кнопку "Оформить заказ"
-  submitButton.addEventListener('click', (e) => {
-    e.preventDefault(); // Предотвращаем стандартную отправку
-
-    console.log('Кнопка "Оформить заказ" нажата!'); // Отладочное сообщение
-
-    // Валидируем форму
-    const validationErrors = validateForm(form);
-
-    if (validationErrors.length > 0) {
-      console.log('Ошибки валидации:', validationErrors);
-      alert('Пожалуйста, исправьте следующие ошибки:\n\n' + validationErrors.join('\n'));
-      return; // Останавливаем отправку формы
-    }
-
-    collectOrderData(form);
-  });
-
-  // Также добавляем обработчик на форму (на случай, если кнопка будет внутри формы)
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('Форма отправлена!');
-
-    // Валидируем форму
-    const validationErrors = validateForm(form);
-
-    if (validationErrors.length > 0) {
-      console.log('Ошибки валидации:', validationErrors);
-      alert('Пожалуйста, исправьте следующие ошибки:\n\n' + validationErrors.join('\n'));
-      return; // Останавливаем отправку формы
-    }
-
-    collectOrderData(form);
-  });
-}
 
 function validateForm(form) {
   const requiredFields = [
@@ -160,12 +109,12 @@ function validateForm(form) {
 
   // Убираем все предыдущие ошибки
   const allInputs = form.querySelectorAll('.contacts-personal__input');
-  allInputs.forEach(input => {
+  allInputs.forEach((input) => {
     input.classList.remove('error');
   });
 
   // Проверяем обязательные поля
-  requiredFields.forEach(field => {
+  requiredFields.forEach((field) => {
     const input = form.querySelector(`[name="${field.name}"]`);
     if (!input || !input.value.trim()) {
       errors.push(`${field.label} обязательно для заполнения`);
@@ -204,16 +153,6 @@ function validateForm(form) {
   return errors;
 }
 
-function collectOrderData(form) {
-  // Валидируем форму перед отправкой
-  const validationErrors = validateForm(form);
-
-  if (validationErrors.length > 0) {
-    console.log('Ошибки валидации:', validationErrors);
-    alert('Пожалуйста, исправьте следующие ошибки:\n\n' + validationErrors.join('\n'));
-    return false; // Останавливаем отправку формы
-  }
-}
 
 /* Валидация комментария */
 
@@ -253,3 +192,140 @@ function initCommentValidation() {
   // Инициализируем при загрузке
   updateValidation();
 }
+
+// Функция для показа ошибок валидации
+function showValidationErrors(errors) {
+  // Проверяем входные данные
+  if (!Array.isArray(errors) || errors.length === 0) {
+    return;
+  }
+
+  // Удаляем предыдущие уведомления
+  const existingContainer = document.querySelector('.validation-errors');
+  if (existingContainer) {
+    existingContainer.remove();
+  }
+
+  // Создаем контейнер для ошибок
+  const errorContainer = document.createElement('div');
+  errorContainer.className = 'validation-errors';
+  errorContainer.setAttribute('role', 'alert');
+  errorContainer.setAttribute('aria-live', 'polite');
+
+  // Создаем заголовок
+  const title = document.createElement('div');
+  title.className = 'validation-errors__title';
+  title.textContent = 'Ошибки валидации:';
+
+  // Создаем список ошибок
+  const list = document.createElement('ul');
+  list.className = 'validation-errors__list';
+
+  errors.forEach(error => {
+    if (typeof error === 'string' && error.trim()) {
+      const listItem = document.createElement('li');
+      listItem.className = 'validation-errors__item';
+      listItem.textContent = error.trim();
+      list.appendChild(listItem);
+    }
+  });
+
+  errorContainer.appendChild(title);
+  errorContainer.appendChild(list);
+  document.body.appendChild(errorContainer);
+
+  // Автоматически скрываем через 5 секунд
+  setTimeout(() => {
+    if (errorContainer && errorContainer.parentNode) {
+      errorContainer.remove();
+    }
+  }, 5000);
+}
+
+// Функция инициализации формы заказа
+function initOrderForm() {
+  try {
+    const form = document.querySelector('.form');
+    const submitButton = document.querySelector('.total__button');
+
+    if (!form || !submitButton) {
+      console.warn('Форма или кнопка отправки не найдены');
+      return;
+    }
+
+    // Проверяем, что функции валидации доступны
+    if (typeof validateForm !== 'function' || typeof collectOrderData !== 'function') {
+      console.error('Функции валидации или сбора данных недоступны');
+      return;
+    }
+
+    // Добавляем обработчики для очистки ошибок при вводе
+    const inputs = form.querySelectorAll('.contacts-personal__input');
+    inputs.forEach((input) => {
+      if (input && typeof input.addEventListener === 'function') {
+        input.addEventListener('input', function() {
+          try {
+            this.classList.remove('error');
+            // Убираем сообщение об ошибках при вводе
+            const errorContainer = document.querySelector('.validation-errors');
+            if (errorContainer && errorContainer.parentNode) {
+              errorContainer.remove();
+            }
+          } catch (error) {
+            console.warn('Ошибка при очистке ошибок:', error);
+          }
+        });
+      }
+    });
+
+    // Обработчик клика на кнопку "Оформить заказ"
+    submitButton.addEventListener('click', (e) => {
+      try {
+        e.preventDefault();
+
+        // Валидируем форму
+        const validationErrors = validateForm(form);
+
+        if (Array.isArray(validationErrors) && validationErrors.length > 0) {
+          // Показываем ошибки пользователю
+          showValidationErrors(validationErrors);
+          return; // Останавливаем отправку формы
+        }
+
+        // Если валидация прошла успешно, собираем данные
+        collectOrderData(form);
+      } catch (error) {
+        console.error('Ошибка при обработке клика на кнопку:', error);
+        showValidationErrors(['Произошла ошибка при отправке формы. Попробуйте еще раз.']);
+      }
+    });
+
+    // Обработчик отправки формы
+    form.addEventListener('submit', (e) => {
+      try {
+        e.preventDefault();
+
+        // Валидируем форму
+        const validationErrors = validateForm(form);
+
+        if (Array.isArray(validationErrors) && validationErrors.length > 0) {
+          // Показываем ошибки пользователю
+          showValidationErrors(validationErrors);
+          return; // Останавливаем отправку формы
+        }
+
+        // Если валидация прошла успешно, собираем данные
+        collectOrderData(form);
+      } catch (error) {
+        console.error('Ошибка при отправке формы:', error);
+        showValidationErrors(['Произошла ошибка при отправке формы. Попробуйте еще раз.']);
+      }
+    });
+
+  } catch (error) {
+    console.error('Ошибка при инициализации формы заказа:', error);
+  }
+}
+
+// Экспортируем функции
+export { validateForm, initFormValidation, initCommentValidation, showValidationErrors, initOrderForm };

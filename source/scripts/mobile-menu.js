@@ -19,3 +19,10 @@ function toggleMenu() {
 }
 
 menuButton.addEventListener('click', toggleMenu);
+
+// Экспортируем функцию
+export { initMobileMenu };
+
+function initMobileMenu() {
+  // Функция уже инициализирована выше
+}

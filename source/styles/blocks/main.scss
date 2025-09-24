@@ -22,7 +22,6 @@
     align-items: start;
     position: relative;
     padding: 0 16px;
-    --right-column-width: calc((100% - 16px) / 3);
   }
 
   @media (min-width: 1300px) {
