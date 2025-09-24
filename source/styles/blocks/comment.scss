@@ -41,13 +41,8 @@
     margin-bottom: -2px;
 
     &:hover {
-      border-color: $grey-2;
-      color: $grey-2;
-
-      &::placeholder {
-        color: $grey-2;
-        transition: color 0.3s ease;
-      }
+      border-color: $grey-3;
+      transition: border-color 0.3s ease, color 0.3s ease;
     }
   }
 }

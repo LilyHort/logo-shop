@@ -26,7 +26,6 @@
     padding: 0;
     max-width: 1300px;
     margin: auto;
-    margin-bottom: 50px;
   }
 }
 
@@ -227,14 +226,16 @@
 }
 
 .header__nav-user-icon {
-  &--mobile {
-    width: 20px;
-    height: 20px;
+  &--bag {
+    width: 28px;
+    height: 28px;
   }
 
   @media (min-width: $desktop-width) {
+    &--bag {
     width: 20px;
     height: 20px;
+    }
   }
 }
 

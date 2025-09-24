@@ -20,6 +20,7 @@
     padding: 25px 0 7px;
     max-width: 100%;
     box-sizing: border-box;
+    align-items: flex-start;
   }
 }
 
@@ -179,10 +180,12 @@ color: $black;
   box-sizing: border-box;
   color: $black;
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 
   &--active {
     background-color: $black;
     color: $white;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   &--none {
@@ -190,7 +193,11 @@ color: $black;
     pointer-events: none;
   }
 
-  &:hover {
+  &--clicked {
+    pointer-events: none;
+  }
+
+  &:hover:not(.card__size-item--clicked) {
     background-color: $grey-2;
   }
 }
@@ -225,6 +232,7 @@ color: $black;
   background-color: $grey-3;
   color: $grey-3;
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 
   &--black {
     background-color: $black-product;
@@ -268,9 +276,10 @@ color: $black;
 
   @media (min-width: 1200px) {
     flex-direction: row;
-    align-items: flex-start;
     gap: 5px;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 25px;
   }
 }
 
@@ -416,7 +425,7 @@ color: $black;
     grid-column: 1/-1;
     display: flex;
     gap: 26px;
-    padding: 18px 25px 10px;
+    padding: 18px 70px 10px 25px;
     align-items: baseline;
   }
 }
@@ -431,11 +440,14 @@ color: $black;
   @media (min-width: $desktop-width) {
     font-size: 16px;
     line-height: 21px;
+    min-width: 0;
   }
 }
 
 .card__item-deleted-name {
   font-weight: 700;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .card__item-deleted-button {
@@ -443,5 +455,7 @@ font-weight: 400;
 font-size: 14px;
 line-height: 18px;
 color: $black;
+flex-shrink: 0;
+white-space: nowrap;
 }
 

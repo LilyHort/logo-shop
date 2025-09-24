@@ -49,17 +49,17 @@ function toggleCardSizeItem() {
   const currentCard = this.closest('.card__item');
   const cardSizeItemsInCurrentCard = currentCard.querySelectorAll('.card__size-item');
 
-  // Убираем активный класс со всех размеров в текущей карточке
+  // Убираем активный класс и clicked класс со всех размеров в текущей карточке
   cardSizeItemsInCurrentCard.forEach((item) => {
-    item.classList.remove('card__size-item--active');
+    item.classList.remove('card__size-item--active', 'card__size-item--clicked');
     const sizeLabel = item.querySelector('.card__size-label');
     if (sizeLabel) {
       sizeLabel.classList.remove('card__size-label--active');
     }
   });
 
-  // Добавляем активный класс к выбранному размеру
-  this.classList.add('card__size-item--active');
+  // Добавляем активный класс и clicked класс к выбранному размеру
+  this.classList.add('card__size-item--active', 'card__size-item--clicked');
   const selectedSizeLabel = this.querySelector('.card__size-label');
   if (selectedSizeLabel) {
     selectedSizeLabel.classList.add('card__size-label--active');
@@ -766,11 +766,29 @@ function initOrderForm() {
     return;
   }
 
+  // Добавляем обработчики для очистки ошибок при вводе
+  const inputs = form.querySelectorAll('.contacts-personal__input');
+  inputs.forEach(input => {
+    input.addEventListener('input', function() {
+      this.classList.remove('error');
+    });
+  });
+
   // Обработчик клика на кнопку "Оформить заказ"
   submitButton.addEventListener('click', (e) => {
     e.preventDefault(); // Предотвращаем стандартную отправку
 
     console.log('Кнопка "Оформить заказ" нажата!'); // Отладочное сообщение
+
+    // Валидируем форму
+    const validationErrors = validateForm(form);
+
+    if (validationErrors.length > 0) {
+      console.log('Ошибки валидации:', validationErrors);
+      alert('Пожалуйста, исправьте следующие ошибки:\n\n' + validationErrors.join('\n'));
+      return; // Останавливаем отправку формы
+    }
+
     collectOrderData(form);
   });
 
@@ -778,13 +796,104 @@ function initOrderForm() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Форма отправлена!');
+
+    // Валидируем форму
+    const validationErrors = validateForm(form);
+
+    if (validationErrors.length > 0) {
+      console.log('Ошибки валидации:', validationErrors);
+      alert('Пожалуйста, исправьте следующие ошибки:\n\n' + validationErrors.join('\n'));
+      return; // Останавливаем отправку формы
+    }
+
     collectOrderData(form);
   });
 }
 
+function validateForm(form) {
+  const requiredFields = [
+    { name: 'name', label: 'Имя' },
+    { name: 'surname', label: 'Фамилия' },
+    { name: 'phone', label: 'Телефон' },
+    { name: 'email', label: 'Email' },
+    { name: 'address', label: 'Адрес доставки' }
+  ];
+
+  const errors = [];
+
+  // Убираем все предыдущие ошибки
+  const allInputs = form.querySelectorAll('.contacts-personal__input');
+  allInputs.forEach(input => {
+    input.classList.remove('error');
+  });
+
+  // Проверяем обязательные поля
+  requiredFields.forEach(field => {
+    const input = form.querySelector(`[name="${field.name}"]`);
+    if (!input || !input.value.trim()) {
+      errors.push(`${field.label} обязательно для заполнения`);
+      if (input) {
+        input.classList.add('error');
+      }
+    }
+  });
+
+  // Проверяем способ оплаты
+  const selectedPayment = document.querySelector('.payment__input:checked');
+  if (!selectedPayment) {
+    errors.push('Выберите способ оплаты');
+  }
+
+  // Проверяем email формат
+  const emailInput = form.querySelector('[name="email"]');
+  if (emailInput && emailInput.value.trim()) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+      errors.push('Введите корректный email адрес');
+      emailInput.classList.add('error');
+    }
+  }
+
+  // Проверяем телефон
+  const phoneInput = form.querySelector('[name="phone"]');
+  if (phoneInput && phoneInput.value.trim()) {
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    if (!phoneRegex.test(phoneInput.value.trim())) {
+      errors.push('Введите корректный номер телефона');
+      phoneInput.classList.add('error');
+    }
+  }
+
+  return errors;
+}
+
 function collectOrderData(form) {
+  // Валидируем форму перед отправкой
+  const validationErrors = validateForm(form);
+
+  if (validationErrors.length > 0) {
+    console.log('Ошибки валидации:', validationErrors);
+    alert('Пожалуйста, исправьте следующие ошибки:\n\n' + validationErrors.join('\n'));
+    return false; // Останавливаем отправку формы
+  }
+
   // Создаем объект FormData
   const formData = new FormData(form);
+
+  // Добавляем чекбокс опции в FormData (он находится вне формы)
+  const optionCheckbox = document.querySelector('#option');
+  if (optionCheckbox) {
+    console.log('Состояние чекбокса option:', optionCheckbox.checked);
+    formData.set('option', optionCheckbox.checked ? 'on' : 'off');
+  } else {
+    console.log('Чекбокс #option не найден!');
+  }
+
+  // Добавляем промокод в FormData (он тоже находится вне формы)
+  const promoInput = document.querySelector('#promo');
+  if (promoInput) {
+    formData.set('promo', promoInput.value || '');
+  }
 
   // Собираем данные о товарах в корзине
   const cartItems = [];
@@ -855,6 +964,13 @@ function collectOrderData(form) {
   // Выводим данные в консоль
   console.log('=== ДАННЫЕ ЗАКАЗА ===');
   console.log('FormData объект:', formData);
+
+  // Выводим содержимое FormData
+  console.log('Содержимое FormData:');
+  for (const [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+
   console.log('Структурированные данные заказа:', orderData);
   console.log('===================');
 
@@ -869,6 +985,8 @@ function collectOrderData(form) {
 
   console.log('Товары в корзине:', orderData.cartItems);
   console.log('Способ оплаты:', orderData.paymentMethod);
+  console.log('Дополнительная опция (со склада):', orderData.option);
+  console.log('Промокод:', orderData.promoCode);
   console.log('Итоговая сумма:', orderData.totalAmount);
 
 }
@@ -949,7 +1067,22 @@ function initToggleSwitches() {
   const toggles = document.querySelectorAll('.total__option-toggle-icon');
 
   toggles.forEach((toggle) => {
+    // Синхронизируем начальное состояние
+    const toggleContainer = toggle.closest('.total__option-toggle');
+    const checkbox = toggleContainer.querySelector('.total__option-toggle-input');
+
+    if (checkbox && checkbox.checked) {
+      toggle.classList.add('total__option-toggle-icon--checked');
+    }
+
     toggle.addEventListener('click', function() {
+      if (checkbox) {
+        // Переключаем состояние чекбокса
+        checkbox.checked = !checkbox.checked;
+        console.log('Чекбокс переключен:', checkbox.checked);
+      }
+
+      // Переключаем визуальное состояние
       this.classList.toggle('total__option-toggle-icon--checked');
     });
   });

@@ -18,22 +18,6 @@
   }
 }
 
-.legal-information__wrapper {
-
-  @media (min-width: $desktop-width) {
-
-    &::before {
-     content: "";
-     border-top: 0.5px solid $grey-2;
-     position: absolute;
-     left: calc(-50vw + 50%);
-     width: 100vw;
-     height: 0.5px;
-     background: $grey-2;
-    }
-  }
-}
-
 .legal-information__list {
   padding: 10px 0;
   display: flex;
