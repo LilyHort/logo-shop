@@ -1,104 +1,11 @@
-/* Синхронизация ширины карты с блоком total */
-function syncMapWidthWithTotal() {
-  const totalBlock = document.querySelector('.total');
-  const mapBlock = document.querySelector('.contacts-personal__map');
 
-  if (totalBlock && mapBlock && window.innerWidth >= 768) {
-    const totalWidth = totalBlock.offsetWidth;
-    mapBlock.style.setProperty('--total-width', `${totalWidth}px`);
-  }
-}
 
-// Вызываем при загрузке и изменении размера окна
-window.addEventListener('load', syncMapWidthWithTotal);
-window.addEventListener('resize', syncMapWidthWithTotal);
 
-/* Открытие и закрытие меню */
-const menuButton = document.querySelector('.header__nav-main-button');
-const navMainList = document.querySelector('.header__nav-main-list');
 
-// Инициализируем кнопку в состоянии "открыть"
-menuButton.classList.add('header__nav-main-button--open');
 
-function toggleMenu() {
-  navMainList.classList.toggle('header__nav-main-list--open');
 
-  // Проверяем текущее состояние и переключаем
-  if (menuButton.classList.contains('header__nav-main-button--open')) {
-    menuButton.classList.remove('header__nav-main-button--open');
-    menuButton.classList.add('header__nav-main-button--close');
-  } else {
-    menuButton.classList.remove('header__nav-main-button--close');
-    menuButton.classList.add('header__nav-main-button--open');
-  }
-}
 
-menuButton.addEventListener('click', toggleMenu);
 
-/* Выбор размера*/
-
-const cardSizeItems = document.querySelectorAll('.card__size-item');
-
-function toggleCardSizeItem() {
-  // Проверяем, не является ли размер недоступным для выбора
-  if (this.classList.contains('card__size-item--none')) {
-    return; // Не выполняем выбор, если размер недоступен
-  }
-
-  // Находим все размеры в той же карточке товара
-  const currentCard = this.closest('.card__item');
-  const cardSizeItemsInCurrentCard = currentCard.querySelectorAll('.card__size-item');
-
-  // Убираем активный класс и clicked класс со всех размеров в текущей карточке
-  cardSizeItemsInCurrentCard.forEach((item) => {
-    item.classList.remove('card__size-item--active', 'card__size-item--clicked');
-    const sizeLabel = item.querySelector('.card__size-label');
-    if (sizeLabel) {
-      sizeLabel.classList.remove('card__size-label--active');
-    }
-  });
-
-  // Добавляем активный класс и clicked класс к выбранному размеру
-  this.classList.add('card__size-item--active', 'card__size-item--clicked');
-  const selectedSizeLabel = this.querySelector('.card__size-label');
-  if (selectedSizeLabel) {
-    selectedSizeLabel.classList.add('card__size-label--active');
-  }
-}
-
-cardSizeItems.forEach((item) => {
-  item.addEventListener('click', toggleCardSizeItem);
-});
-
-/* Выбор цвета*/
-
-const cardColorItem = document.querySelectorAll('.card__color-item');
-
-function toggleCardColorItem() {
-  // Находим все цвета в той же карточке товара
-  const currentCard = this.closest('.card__item');
-  const cardColorItemsInCurrentCard = currentCard.querySelectorAll('.card__color-item');
-
-  // Убираем активный класс со всех цветов в текущей карточке
-  cardColorItemsInCurrentCard.forEach((item) => {
-    item.classList.remove('card__color-item--active');
-    const colorLabel = item.querySelector('.card__color-label');
-    if (colorLabel) {
-      colorLabel.classList.remove('card__color-label--active');
-    }
-  });
-
-  // Добавляем активный класс к выбранному цвету
-  this.classList.add('card__color-item--active');
-  const selectedColorLabel = this.querySelector('.card__color-label');
-  if (selectedColorLabel) {
-    selectedColorLabel.classList.add('card__color-label--active');
-  }
-}
-
-cardColorItem.forEach((item) => {
-  item.addEventListener('click', toggleCardColorItem);
-});
 
 /* Изменение количества товара */
 
