@@ -208,6 +208,7 @@
 }
 
 .total__input-filt {
+  position: relative;
   border: 1px solid $grey-2;
   width: 100%;
   box-sizing: border-box;
@@ -244,21 +245,85 @@
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s, color 0.3s;
-  display: flex;
+  transition: all 0.3s ease;
+  display: none;
   position: absolute;
-  top: 36%;
-  right: 8px;
+  top: 33%;
+  right: 15px;
   transform: translateY(-50%);
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
+  opacity: 0;
+  animation: fadeInButton 0.3s ease forwards;
 
   &:hover {
     color: $grey-1;
   }
 }
 
+@keyframes fadeInButton {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+// Стили для сообщения об успешном применении промокода
+.total__promo-success {
+  color: $success;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 120px;
+  left: 20px;
+  right: 0;
+  z-index: 10;
+  animation: slideInSuccess 0.3s ease-out;
+}
+
+// Стили для сообщения об ошибке промокода
+.total__promo-error {
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 120px;
+  left: 20px;
+  right: 0;
+  z-index: 10;
+  animation: slideInError 0.3s ease-out;
+}
+
+@keyframes slideInSuccess {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 // Стили для сообщений об ошибках в total
 .total__error {

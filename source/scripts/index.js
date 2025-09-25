@@ -7,20 +7,8 @@ import { initSizeSelection } from './change-size.js';
 import { initGoodsChanging } from './changing-goods.js';
 import { initFormValidation, initCommentValidation, initOrderForm } from './valid.js';
 import { initMap, initDaDataSuggestions } from './map.js';
-
-// Инициализация кнопки "Наверх"
-function initScrollToTop() {
-  const scrollButton = document.querySelector('.footer__button');
-
-  if (scrollButton) {
-    scrollButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
-}
+import { initScrollToTop } from './up-button.js';
+import { initPromoButton } from './promo.js';
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,4 +24,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initDaDataSuggestions();
   initScrollToTop();
+  initPromoButton();
 });
