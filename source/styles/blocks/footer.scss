@@ -7,8 +7,38 @@
 
   @media (min-width: $desktop-width) {
     position: relative;
+    padding-top: 33px;
   }
 }
+
+.footer__button {
+  display: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  @media (min-width: $desktop-width) {
+    display: block;
+    position: absolute;
+    top: -15px;
+    right: 30px;
+
+    &:hover {
+      opacity: 1.8;
+    }
+  }
+}
+
+.footer__button-icon {
+  color: $grey-2;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer__button:hover .footer__button-icon {
+  color: $grey-1;
+}
+
+
+
 
 .footer__more-links {
   @media (min-width: $desktop-width) {
@@ -22,23 +52,26 @@
   flex-direction: column;
   gap: 20px;
 
+
+  &::before {
+    content: "";
+    border-top: 0.5px solid $grey-2;
+    position: absolute;
+    left: calc(-50vw + 50%);
+    width: 100vw;
+    height: 0.5px;
+    background: $grey-2;
+  }
+
   @media (min-width: $desktop-width) {
    display: grid;
    grid-template-columns: 1fr 2fr;
    gap: 150px;
    padding: 0 20px;
    max-width: 1300px;
+   margin-bottom: 100px;
 
 
-    &::before {
-      content: "";
-      border-top: 0.5px solid $grey-2;
-      position: absolute;
-      left: calc(-50vw + 50%);
-      width: 100vw;
-      height: 0.5px;
-      background: $grey-2;
-    }
   }
 }
 
@@ -85,6 +118,8 @@ color: $black;
 }
 
 .footer__discount-input {
+  transition: border-color 0.3s ease, color 0.3s ease;
+
   @media (min-width: $desktop-width) {
     cursor: pointer;
 
@@ -148,10 +183,10 @@ color: $black;
 
 .footer__discount-button-icon {
   padding-right: 10px;
+  transition: opacity 0.3s ease;
 
   &:hover {
     opacity: 0.3;
-    transition: opacity 0.3s ease;
   }
 }
 
@@ -165,6 +200,11 @@ color: $black;
 
 .footer__discount-text-link {
   text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $grey-2;
+  }
 }
 
 .footer__list {
@@ -175,4 +215,13 @@ color: $black;
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
+}
+
+
+.footer__nav-item {
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $grey-2;
+  }
 }

@@ -10,9 +10,17 @@
   margin-bottom: 35px;
 
   @media (min-width: $desktop-width) {
-    margin-bottom: 47px;
-    padding: 0 18px;
+    margin: 49px 0 47px;
+    padding: 0 51px;
 
+  }
+}
+
+.bread-crumbs__link {
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $grey-2;
   }
 }
 

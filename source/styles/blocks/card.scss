@@ -15,22 +15,28 @@
 
   @media (min-width: $desktop-width) {
     display: grid;
-    grid-template-columns: 130px 1fr 1.5fr;
-    gap: 20px;
+    grid-template-columns: 130px minmax(0, 229px) minmax(0, 371px) minmax(0, 29px);
+    //gap: 15px;
     padding: 25px 0 7px;
-    max-width: 100%;
+    max-width: 760px;
     box-sizing: border-box;
+    align-items: flex-start;
   }
 }
 
 .card__item:last-child {
   border-bottom: 0.50px solid $grey-2;
+
+  @media (min-width: $desktop-width) {
+    padding-bottom: 18px;
+  }
 }
 
 .card__content {
   @media (min-width: $desktop-width) {
     display: flex;
     flex-direction: column;
+    padding-left: 20px;
   }
 }
 
@@ -50,6 +56,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
+  transition: opacity 0.3s ease;
 
   &--restore {
     top: 30px;
@@ -77,11 +84,11 @@
   }
 
   @media (min-width: $desktop-width) {
-    top: 25px;
+    top: 26px;
     right: 1px;
 
     &--restore {
-      top: 41px;
+      top: 42px;
       right: 26px;
     }
   }
@@ -160,7 +167,7 @@ color: $black;
 
 .card__size-list {
   display: flex;
-  gap: 8px;
+  gap: 9px;
 
   @media (min-width: $desktop-width) {
     gap: 5px;
@@ -179,10 +186,12 @@ color: $black;
   box-sizing: border-box;
   color: $black;
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 
   &--active {
     background-color: $black;
     color: $white;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   &--none {
@@ -190,7 +199,11 @@ color: $black;
     pointer-events: none;
   }
 
-  &:hover {
+  &--clicked {
+    pointer-events: none;
+  }
+
+  &:hover:not(.card__size-item--clicked) {
     background-color: $grey-2;
   }
 }
@@ -210,7 +223,7 @@ color: $black;
 
 .card__color-list {
   display: flex;
-  gap: 20px;
+  gap: 21px;
 
   @media (min-width: $desktop-width) {
     gap: 10px;
@@ -225,6 +238,7 @@ color: $black;
   background-color: $grey-3;
   color: $grey-3;
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 
   &--black {
     background-color: $black-product;
@@ -253,7 +267,7 @@ color: $black;
 /* Цена */
 .card__price {
   display: flex;
-  gap: 5px;
+  gap: 8px;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
@@ -268,9 +282,15 @@ color: $black;
 
   @media (min-width: 1200px) {
     flex-direction: row;
-    align-items: flex-start;
     gap: 5px;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 2px;
+
+    &--short {
+      justify-content: end;
+      gap: 34px;
+    }
   }
 }
 
@@ -311,6 +331,7 @@ color: $black;
   font-size: 16px;
   line-height: 21px;
   color: $black;
+  transition: color 0.3s ease;
 
   // Убираем кастомные стрелки для input[type="number"]
   -moz-appearance: textfield;
@@ -405,7 +426,11 @@ color: $black;
 /* Удаленный товар */
 
 .card__item-deleted {
-  padding: 25px 0 23px;
+  padding: 19px 0 15px;
+
+  @media (min-width: $desktop-width) {
+    padding: 25px 0 24px;
+  }
 }
 
 .card__item-deleted-wrapper {
@@ -416,7 +441,7 @@ color: $black;
     grid-column: 1/-1;
     display: flex;
     gap: 26px;
-    padding: 18px 25px 10px;
+    padding: 18px 70px 10px 25px;
     align-items: baseline;
   }
 }
@@ -431,17 +456,23 @@ color: $black;
   @media (min-width: $desktop-width) {
     font-size: 16px;
     line-height: 21px;
+    min-width: 0;
   }
 }
 
 .card__item-deleted-name {
   font-weight: 700;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .card__item-deleted-button {
-font-weight: 400;
-font-size: 14px;
-line-height: 18px;
-color: $black;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: $black;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: color 0.3s ease;
 }
 

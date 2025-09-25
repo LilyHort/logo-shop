@@ -19,6 +19,10 @@
   gap: 10px;
 }
 
+.payment__label {
+  cursor: pointer;
+}
+
 .payment__label-icon {
   width: 22px;
   height: 22px;
@@ -45,11 +49,13 @@
   }
 }
 
-.payment__item:hover {
-  .payment__label-icon,
-  .payment__label-text {
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
+.payment__item {
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    .payment__label-icon {
+      opacity: 0.3;
+    }
   }
 }
 

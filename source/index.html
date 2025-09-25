@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 
-<body class="page__body">
-  <div class="page__wrapper">
+<body>
+
     <header class="header">
       <div class="header__wrapper">
         <a class="header__logo-link link-reset" href="#">
@@ -27,7 +27,7 @@
               <li class="header__nav-user-item header__nav-user-item--mobile header__item">
                 <a class="header__link link-reset" href="#">
                   <span class="visually-hidden">Поиск</span>
-                  <svg class="header__nav-user-icon header__nav-user-icon--search" width="28" height="28">
+                  <svg class="header__nav-user-icon header__nav-user-icon--search" width="20" height="20">
                     <use href="./icons/stack.svg#search"></use>
                   </svg>
                 </a>
@@ -35,7 +35,7 @@
               <li class="header__nav-user-item header__nav-user-item--mobile header__item">
                 <a class="header__link link-reset" href="#">
                   <span class="visually-hidden">Войти</span>
-                  <svg class="header__nav-user-icon header__nav-user-icon--account" width="28" height="28">
+                  <svg class="header__nav-user-icon header__nav-user-icon--account" width="20" height="20">
                     <use href="./icons/stack.svg#account"></use>
                   </svg>
                 </a>
@@ -44,7 +44,7 @@
                 <a class="header__link link-reset" href="#">
                   <span class="header__nav-user-item-count">8</span>
                   <span class="visually-hidden">Избранное</span>
-                  <svg class="header__nav-user-icon header__nav-user-icon--favorite" width="28" height="28">
+                  <svg class="header__nav-user-icon header__nav-user-icon--favorite" width="20" height="20">
                     <use href="./icons/stack.svg#favorite"></use>
                   </svg>
                 </a>
@@ -53,7 +53,7 @@
                 <a class="header__link link-reset" href="#">
                   <span class="header__nav-user-item-count">4</span>
                   <span class="visually-hidden">Корзина</span>
-                  <svg class="header__nav-user-icon header__nav-user-icon--bag" width="28" height="28">
+                  <svg class="header__nav-user-icon header__nav-user-icon--bag" width="20" height="20">
                     <use href="./icons/stack.svg#bag"></use>
                   </svg>
                 </a>
@@ -81,7 +81,7 @@
               <li class="header__nav-main-item header__nav-main-item--desktop header__item">
                 <a class="header__link link-reset" href="#">
                   <svg class="header__nav-user-icon header__nav-user-icon--mobile header__nav-user-icon--search"
-                    width="28" height="28">
+                    width="20" height="20">
                     <use href="./icons/stack.svg#search"></use>
                   </svg>
                   <span class="header__nav-main-item-text">Поиск</span>
@@ -90,7 +90,7 @@
               <li class="header__nav-main-item header__nav-main-item--desktop header__item">
                 <a class="header__link link-reset" href="#">
                   <svg class="header__nav-user-icon header__nav-user-icon--mobile header__nav-user-icon--account"
-                    width="28" height="28">
+                    width="20" height="20">
                     <use href="./icons/stack.svg#account"></use>
                   </svg>
                   <span class="header__nav-main-item-text">Войти</span>
@@ -99,7 +99,7 @@
               <li class="header__nav-main-item header__nav-main-item--desktop header__item">
                 <a class="header__link link-reset" href="#">
                   <svg class="header__nav-user-icon header__nav-user-icon--mobile header__nav-user-icon--favorite"
-                    width="28" height="28">
+                    width="20" height="20">
                     <use href="./icons/stack.svg#favorite"></use>
                   </svg>
                   <span class="header__nav-main-item-text">Избранное</span>
@@ -253,13 +253,11 @@
                           <button class="card__price-quantity-button card__price-quantity-button--minus button-reset"
                             type="button">
                             <span class="visually-hidden">Уменьшить количество</span>
-                            <span class="card__price-quantity-button-minus"></span>
                           </button>
                           <input class="card__price-quantity-input" type="number" value="2" min="1" max="100">
                           <button class="card__price-quantity-button card__price-quantity-button--plus button-reset"
                             type="button">
                             <span class="visually-hidden">Увеличить количество</span>
-                            <span class="card__price-quantity-button-plus"></span>
                           </button>
                         </div>
                         <div class="card__price-total">
@@ -357,7 +355,7 @@
                           </fieldset>
                         </div>
 
-                        <div class="card__price">
+                        <div class="card__price  card__price--short">
                           <div class="card__price-unit">
                             <span class="card__price-current">500&nbsp;<span class="ruble ruble--card-current">₽
                               </span></span>
@@ -365,12 +363,10 @@
                           <div class="card__price-quantity">
                             <button class="card__price-quantity-button card__price-quantity-button--minus button-reset"
                               type="button">
-
                             </button>
                             <input class="card__price-quantity-input" type="number" value="1" min="1" max="100">
                             <button class="card__price-quantity-button card__price-quantity-button--plus button-reset"
                               type="button">
-
                             </button>
                           </div>
                           <div class="card__price-total">
@@ -401,24 +397,24 @@
                     </li>
                     <li class="contacts-personal__item contacts-personal__item--surname">
                       <label class="contacts-personal__label" for="surname">Фамилия</label>
-                      <input class="contacts-personal__input input__style" type="text" name="surname" id="surname"
+                      <input class="contacts-personal__input" type="text" name="surname" id="surname"
                         placeholder="Фамилия" required>
                     </li>
                     <li class="contacts-personal__item contacts-personal__item--phone">
                       <label class="contacts-personal__label" for="phone">Телефон</label>
-                      <input class="contacts-personal__input input__style" type="text" name="phone" id="phone" placeholder="Телефон"
+                      <input class="contacts-personal__input" type="text" name="phone" id="phone" placeholder="Телефон"
                         required>
                     </li>
                     <li class="contacts-personal__item contacts-personal__item--email">
                       <label class="contacts-personal__label" for="email">Email</label>
-                      <input class="contacts-personal__input input__style" type="email" name="email" id="email" placeholder="Email"
+                      <input class="contacts-personal__input" type="email" name="email" id="email" placeholder="Email"
                         required>
                     </li>
                     <li class="contacts-personal__item contacts-personal__item--address">
                       <label class="contacts-personal__label" for="address">Адрес доставки</label>
-                      <input class="contacts-personal__input input__style" type="text" name="address" id="address"
+                      <input class="contacts-personal__input" type="text" name="address" id="address"
                         placeholder="Адрес доставки" required>
-                      <div class="contacts-personal__map"> </div>
+                      <div class="contacts-personal__map"></div>
                     </li>
                   </ul>
                 </fieldset>
@@ -510,7 +506,12 @@
               <span class="total__final-value">20&nbsp;700 <span class="ruble ruble--total-price">₽
                 </span></span>
             </div>
-            <input class="total__input input__style" type="text" name="promo" id="promo" placeholder="Введите промокод">
+            <div class="total__input">
+            <input class="total__input-filt" type="text" name="promo" id="promo" placeholder="Введите промокод">
+              <button class="total__input-button button-reset" type="button">
+                Применить
+              </button>
+          </div>
             <button class="total__button button-reset" type="submit">Оформить заказ</button>
             <p class="total__text">Нажимая кнопку "Оформить заказ", Вы соглашаетесь с <a
                 class="total__text-link link-reset" href="#">политикой конфиденциальности.</a></p>
@@ -521,12 +522,18 @@
     <footer class="footer">
       <div class="footer__wrapper">
         <div class="footer__main">
+          <button class="footer__button button-reset" type="button">
+            <svg class="footer__button-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x=".5" y=".5" width="39" height="39" rx="19.5" stroke="currentColor"/>
+              <path d="M19.25 30a.75.75 0 0 0 1.5 0h-1.5Zm1.28-20.53a.75.75 0 0 0-1.06 0l-4.77 4.77a.75.75 0 0 0 1.06 1.06l4.24-4.24 4.24 4.24a.75.75 0 0 0 1.06-1.06l-4.77-4.77Zm.22 20.53v-20h-1.5v20h1.5Z" fill="currentColor"/>
+            </svg>
+          </button>
           <section class="footer__discount">
             <h2 class="footer__discount-title title">Скидка 10% за подписку
               на наши новости</h2>
             <form class="footer__discount-form">
               <div class="footer__discount-input-wrapper">
-                <input type="email" class="footer__discount-input input__style" placeholder="Ваш email" required>
+                <input type="email" class="footer__discount-input" placeholder="Ваш email" required>
                 <button type="submit" class="footer__discount-button" aria-label="Отправить email">
                   <span class="footer__discount-button-icon">                  <svg class="header__nav-user-icon header__nav-user-icon--search" width="28" height="28">
                     <use href="./icons/stack.svg#search"></use>
@@ -620,30 +627,30 @@
           <h2 class="legal-information-title title visually-hidden">Юридическая информация</h2>
           <div class="legal-information__wrapper">
             <ul class="legal-information__list list-reset">
-              <li class="legal-information-item">
-                <a class="legal-information-link link-reset" href="#">
+              <li class="legal-information__item">
+                <a class="legal-information__link link-reset" href="#">
                   &copy;All rights reserved
                 </a>
               </li>
-              <li class="legal-information-item">
-                <a class="legal-information-link link-reset" href="#">
+              <li class="legal-information__item">
+                <a class="legal-information__link link-reset" href="#">
                   Публичная оферта
                 </a>
               </li>
-              <li class="legal-information-item">
-                <a class="legal-information-link link-reset" href="#">
+              <li class="legal-information__item">
+                <a class="legal-information__link link-reset" href="#">
                   Политика конфиденциальности
                 </a>
               </li>
-              <li class="legal-information-item">
-                <a class="legal-information-link link-reset" href="#">
+              <li class="legal-information__item legal-information__item--studio">
+                <a class="legal-information__link link-reset" href="#">
                   Сделано в студии
-                  <span class="legal-information-link-studio-icon">
-                    <svg class="legal-information-link-studio-icon-svg" width="21" height="21">
+                  <span class="legal-information__icon">
+                    <svg class="legal-information__icon-svg" width="21" height="21">
                       <use href="./icons/stack.svg#5-logo"></use>
                     </svg>
                   </span>
-                  <span class="legal-information-link-studio-text">5 углов</span>
+                  <span class="legal-information__text">5 углов</span>
                 </a>
               </li>
 
@@ -652,15 +659,9 @@
         </section>
       </div>
     </footer>
-  </div>
 
-  <!-- Yandex Maps API -->
   <script src="https://api-maps.yandex.ru/2.1/?apikey=f744a2c0-e2ea-421d-a839-f13515eb267e&lang=ru_RU"></script>
-
-  <!-- DaData API - используем собственную реализацию -->
-
-  <!-- Наш основной скрипт - загружается после всех API -->
-  <script src="scripts/index.js"></script>
+  <script type="module" src="scripts/index.js"></script>
 </body>
 
 </html>

@@ -11,8 +11,6 @@
     margin-bottom: 20px;
     z-index: 10;
     width: 100%;
-   // max-width: 100%;
-
     // CSS переменная для ширины total (для наследования картой)
     --total-width: 100%;
   }
@@ -20,6 +18,10 @@
 
 .total__wrapper {
   padding: 22px 15px;
+
+  @media (min-width: $desktop-width) {
+    padding: 23px 19px 29px;
+  }
 }
 
 .total__list {
@@ -202,6 +204,11 @@
 }
 
 .total__input {
+  position: relative;
+}
+
+.total__input-filt {
+  position: relative;
   border: 1px solid $grey-2;
   width: 100%;
   box-sizing: border-box;
@@ -213,30 +220,108 @@
   cursor: pointer;
   transition: border-color 0.3s ease, color 0.3s ease;
 
-
   // Стили для валидации с кастомными сообщениями
   &.error {
     border-color: #ff4444;
-
-    &::placeholder {
-      color: #ff4444;
-    }
   }
 
   @media (min-width: $desktop-width) {
-    padding: 15px 19px;
+    padding: 11px 115px 11px 16px;
     margin-bottom: 19px;
 
     &:hover {
       border-color: $grey-2;
-      transition: border-color 0.3s ease, color 0.3s ease;
-      color: $grey-2;
 
-      &::placeholder {
-        color:  $grey-2;
-        transition: color 0.3s ease;
-      }
     }
+  }
+}
+
+.total__input-button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  color: $black;
+  background: transparent;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  display: none;
+  position: absolute;
+  top: 33%;
+  right: 15px;
+  transform: translateY(-50%);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  opacity: 0;
+  animation: fadeInButton 0.3s ease forwards;
+
+  &:hover {
+    color: $grey-1;
+  }
+}
+
+@keyframes fadeInButton {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+// Стили для сообщения об успешном применении промокода
+.total__promo-success {
+  color: $success;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 120px;
+  left: 20px;
+  right: 0;
+  z-index: 10;
+  animation: slideInSuccess 0.3s ease-out;
+}
+
+// Стили для сообщения об ошибке промокода
+.total__promo-error {
+  color: #ff4444;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 120px;
+  left: 20px;
+  right: 0;
+  z-index: 10;
+  animation: slideInError 0.3s ease-out;
+}
+
+@keyframes slideInSuccess {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -248,6 +333,7 @@
   line-height: 15px;
   margin-top: 4px;
   margin-bottom: 12px;
+  transition: display 0.3s ease;
 
   &.show {
     display: block;
@@ -262,10 +348,10 @@
   line-height: 15px;
   margin-top: 4px;
   margin-bottom: 12px;
+  transition: display 0.3s ease;
 
   &.show {
     display: block;
-    transition: display 0.3s ease;
   }
 
   .valid-ok {
@@ -285,18 +371,12 @@
   color: $white;
   background-color: $black;
   padding: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   @media (min-width: $desktop-width) {
     &:hover {
-      background-color: $grey-2;
-      color: $grey-1;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    &:active {
       background-color: $grey-1;
       color: $white;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
   }
 }
@@ -313,4 +393,10 @@
 
   .total__text-link {
     text-decoration: underline;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $grey-2;
+    }
+
   }
