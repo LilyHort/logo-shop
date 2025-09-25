@@ -8,6 +8,20 @@ import { initGoodsChanging } from './changing-goods.js';
 import { initFormValidation, initCommentValidation, initOrderForm } from './valid.js';
 import { initMap, initDaDataSuggestions } from './map.js';
 
+// Инициализация кнопки "Наверх"
+function initScrollToTop() {
+  const scrollButton = document.querySelector('.footer__button');
+
+  if (scrollButton) {
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+}
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
   initFormLabels();
@@ -21,4 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCommentValidation();
   initMap();
   initDaDataSuggestions();
+  initScrollToTop();
 });

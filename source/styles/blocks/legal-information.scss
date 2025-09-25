@@ -14,23 +14,29 @@
   }
 }
 
-.legal-information-link {
+.legal-information__link {
   display: flex;
   align-items: center;
   gap: 4px;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $grey-2;
+  }
 }
 
-.legal-information-link-studio-icon {
+.legal-information__item {
+  &--studio {
+    color: $black;
+  }
+}
+
+.legal-information__icon {
   display: flex;
   align-items: center;
 }
 
-.legal-information-link-studio-icon-svg {
-  width: 21px;
-  height: 21px;
-}
-
-.legal-information-link-studio-text {
+.legal-information__text {
   display: flex;
   align-items: center;
 }

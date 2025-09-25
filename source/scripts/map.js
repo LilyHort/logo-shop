@@ -4,9 +4,12 @@ function syncMapWidthWithTotal() {
   const totalBlock = document.querySelector('.total');
   const mapBlock = document.querySelector('.contacts-personal__map');
 
+  console.log('Синхронизация ширины карты:', { totalBlock, mapBlock, windowWidth: window.innerWidth });
+
   if (totalBlock && mapBlock && window.innerWidth >= 768) {
     const totalWidth = totalBlock.offsetWidth;
     mapBlock.style.setProperty('--total-width', `${totalWidth}px`);
+    console.log('Установлена ширина карты:', totalWidth);
   }
 }
 
@@ -25,16 +28,22 @@ let mapPlacemark = null;
 
 // Инициализация Яндекс.Карты
 function initYandexMap() {
+  console.log('Инициализация Яндекс.Карты...');
+
   window.ymaps.ready(() => {
     const mapContainer = document.querySelector('.contacts-personal__map');
     const addressInput = document.querySelector('#address');
 
+    console.log('Элементы найдены:', { mapContainer, addressInput });
+
     if (!mapContainer || !addressInput){
+      console.warn('Элементы карты не найдены');
       return;
     }
 
     // Показываем карту сразу для тестирования
     mapContainer.classList.add('contacts-personal__map--visible');
+    console.log('Класс --visible добавлен к карте');
 
     // Создаем карту с центром в Москве
     yandexMap = new window.ymaps.Map(mapContainer, {

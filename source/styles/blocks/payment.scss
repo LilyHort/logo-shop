@@ -49,10 +49,13 @@
   }
 }
 
-.payment__item:hover {
-  .payment__label-icon {
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
+.payment__item {
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    .payment__label-icon {
+      opacity: 0.3;
+    }
   }
 }
 
